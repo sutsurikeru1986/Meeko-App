@@ -1,0 +1,84 @@
+
+<section id="meekomagazine" class="meekomagajax">
+
+    <div class="row fullwidthmeeko">
+
+        <div class="small-12 columns">
+
+            <div class="magazinehome">
+                
+                <div class="row">
+
+                    <div class="small-12 columns">
+
+                        <div ng-controller="CategoryList" class="meekomagcats">
+                            <h3>Magazine Categories</h3>
+                            <ul>
+                                <li ng-repeat="category in categories"><a href="/magazine/{{ category.slug }}">{{ category.title }}</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <ul class="masonrycontainer">
+
+                        <li class="magazineitem" ng-repeat="post in posts">
+
+                            <div class="wrappermagazine">
+
+                                <div class="imagepreview">
+
+                                    <a href="/magazine/{{ post.categories[0].slug }}/{{ post.slug }}">
+
+                                        <img src="{{ post.custom_fields.meekopin.join(', ') ? post.custom_fields.meekopin.join(', ') : post.thumbnail_images.full.url }}" />                             
+                                        
+                                    </a>
+
+                                </div>
+
+                                <div class="magazinedetailalt">
+
+                                    <h1><a href="/magazine/{{ post.categories[0].slug }}/{{ post.slug }}" ng-bind-html="post.title"></a></h1>
+
+                                </div>
+
+                                <div class="magazineauthorhome">
+
+                                    <div class="smallavatar">
+
+                                        <img src="http://preview.meeko.me/wp-content/themes/meeko/img/meeko-avatar.jpg">
+
+                                    </div>
+
+                                    <div class="authordetails">
+
+                                        <p>Meeko Editor</p>
+                                        <div class="cats">Summer, Party, Dresses</div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</section>                    
+
+<a ng-show="prev > 0" href="/magazine/page/{{ prev }}">Prev</a> |
+Page {{ page }} of {{paging.pages}} | 
+<a ng-show="next <= paging.pages" href="/blog/page/{{ next }}">Next</a>

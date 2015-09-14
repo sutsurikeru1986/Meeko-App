@@ -1,0 +1,79 @@
+<!--<div ng-controller="CategoryListProduct">
+	<h3>Dress types</h3>
+	<ul>
+		<li ng-repeat="post in posts"><a href="/product/{{ post.taxonomy_product_cat[0].slug }}">{{ post.taxonomy_product_cat[0].title }}</a></li>
+	</ul>
+</div>-->
+
+<section id="meekoLatestProducts">
+    
+    <div class="row">
+
+        <div class="small-12 columns">
+
+            <ul class="small-block-grid-2">
+
+                <li ng-repeat="post in posts">
+
+                    <div id="product_300" class="categoryarchivegrid">
+                        <div id="product_300" class="item-content">      
+
+                            <div class="dressimg">
+                                <a href="/product/{{ post.taxonomy_product_cat[0].slug }}/{{ post.slug }}">
+                                    <img src="{{ post.thumbnail_images.full.url }}" />
+                                </a>
+                            </div>
+
+                            <div class="dresstitle">
+
+                                <p ng-bind-html="post.title"></p>  
+
+                            </div>
+
+                            <div class="dressprice">
+                                <p>
+                                    
+                                    <span ng-if="post.custom_fields._regular_price == ''"></span>    
+                                    <span ng-if="post.custom_fields._regular_price != ''" class="amount">
+                                        {{ post.custom_fields._regular_price | myCurrency }}
+                                    </span>
+
+
+                                    <span ng-if="post.custom_fields._sale_price == ''"></span>
+
+                                    <span ng-if="post.custom_fields._sale_price != ''" class="amount">
+                                        {{ post.custom_fields._sale_price | myCurrency }}
+                                    </span>
+                                    
+                                    <span ng-if="post.custom_fields._sale_price != '' && post.custom_fields._sale_price != ''">
+                                        <span class="saving">
+                                            {{ ((post.custom_fields._sale_price/post.custom_fields._regular_price)*100).toFixed(0) }}% Off
+                                        </span>
+                                        
+                                    </span>
+                                    
+                                    
+                                </p>
+                            </div>  
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+            </ul>
+
+            <div class="pagination view-animate">
+
+                <a ng-show="prev > 0" href="/product/page/{{ prev }}">Prev</a> |
+                Page {{ page }} of {{paging.pages}} | 
+                <a ng-show="next <= paging.pages" href="/product/page/{{ next }}">Next</a>
+
+            </div>    
+
+        </div>
+
+    </div>
+
+</section>

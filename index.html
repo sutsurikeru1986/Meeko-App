@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="meekoApp">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- include jQuery -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- include AngularJS plus modules -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
+    <script type="text/javascript" src="http://preview.meeko.me/wp-content/themes/meeko/js/owl.carousel.min.js"></script>
+    <script src="https://code.angularjs.org/1.2.22/angular-route.min.js"></script>
+    <script src="https://code.angularjs.org/1.2.22/angular-animate.min.js"></script>
+    <script src="https://code.angularjs.org/1.2.22/angular-resource.min.js"></script>
+    <script src="https://code.angularjs.org/1.2.22/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="http://localhost/meeko/wp-content/themes/meeko/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="http://localhost/meeko/wp-content/themes/meeko/js/imagesloaded.js"></script>
+
+    <!-- include custom AngularJS files -->
+    <script src="js/app.js"></script>
+
+    <!-- include custom AngularJS files -->
+    <script src="js/meekoApp.js"></script>
+    <script src="js/ngRepeatOwlCarousel.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <!-- include custom CSS -->
+    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/foundation.custom.min.css" rel="stylesheet">
+    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/normalize.css" rel="stylesheet">
+    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/styles.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?c99495" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.carousel.css" rel="stylesheet">
+    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.theme.css" rel="stylesheet">
+    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.transitions.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <section id="header">
+        <div class="row fullwidthmeeko">
+            <div class="show-for-small-only searchiconmobile"></div>
+            <div class="small-12 medium-3 large-3 columns">
+                <div class="logo">
+                    <a href="http://localhost/"> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/meeko.png?c99495"> </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="mobilemeekohome">
+        <div class="mobilequicktab" ng-controller="MenuController">
+            <div class="row">
+                <div class="small-4 columns">
+                    <div class="mobiletab">
+                        <p><a class="promos" ng-class="{ activetab:isActive('/') }" class="promos" href="/">Promos</a></p>
+                    </div>
+                </div>
+                <div class="small-4 columns">
+                    <div class="mobiletab">
+                        <p><a class="latestmeekomobile" ng-class="{ activetab:isActive('/product/') }" href="/product/">Latest Arrivals</a></p>
+                    </div>
+                </div>
+                <div class="small-4 columns">
+                    <div class="mobiletab">
+                        <p><a class="latestmeekomag" ng-class="{ activetab:isActive('/magazine/') }" href="/magazine/">Style Mag</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+
+        <div class="view-animate-container">
+
+            <div ng-view class="view-animate"></div>
+
+        </div>
+
+    </section>
+
+    <section id="footer">
+        <div class="togglecontainer">
+            <div class="showfooter togglefooter"><span class="switch"><i class="fa fa-chevron-up"></i></span></div>
+        </div>
+        <div class="hiddenfooter">
+            <div class="row">
+                <div class="small-6 medium-2 large-2 columns">
+                    <h3>Meeko</h3>
+                    <ul>
+                        <li>About us</li>
+                        <li>FAQ</li>
+                        <li>Contact us</li>
+                        <li>Delivery</li>
+                        <li>Returns</li>
+                        <li>Payment types</li>
+                    </ul>
+                </div>
+                <div class="small-6 medium-2 large-2 columns">
+                    <h3>Help</h3>
+                    <ul>
+                        <li>Sizing guides</li>
+                        <li>Style advice</li>
+                    </ul>
+                </div>
+                <div class="small-12 medium-3 large-3 columns">
+                    <h3>Connect</h3>
+                    <ul class="connect">
+                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/instagram.png?c99495"></li>
+                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/twitter.png?c99495"></li>
+                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/facebook.png?c99495"></li>
+                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/pinterest.png?c99495"></li>
+                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/gplus.png?c99495"></li>
+                    </ul>
+                </div>
+                <div class="small-12 medium-5 large-5 columns">
+                    <h3>Love offers? We do!</h3>
+                    <div class="email">
+                        <form id="mc-form" novalidate="true">
+                            <input id="mc-email" type="email" class="searchbox" placeholder="Subscribe for all our latest offers" required="" name="EMAIL">
+                            <label for="mc-email"></label>
+                            <button type="submit" class="emailgo">Go</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="small-12 medium-12 large-12 columns">
+                <div class="copyright">
+                    <p>© Meeko.me 2015</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

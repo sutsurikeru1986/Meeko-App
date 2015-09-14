@@ -1,0 +1,144 @@
+<section id="productdetail">
+    
+    <div class="row">
+        
+        <div class="small-12 medium-12 large-12 columns">
+            
+            <div class="breadcrumb-wishlist productheader">
+                
+                <div class="row">
+                    
+                    <div class="small-12 medium-10 large-10 columns" itemprop="breadcrumb">
+                        <p>
+                            <a class="home" href="http://localhost">Home</a> / <a href="http://preview.meeko.me/product-category/day/">{{ post.post.taxonomy_product_cat[0].title }}</a> /  <span ng-bind-html="post.post.title"></span></p>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>  
+
+    <div class="row">
+
+        <div class="small-12 medium-12 large-12 columns">
+
+            <div class="product-container">
+
+                <div class="product-images">
+                    
+                    <!-- this was a nightmare to get working! -->
+                    <data-owl-carousel class="owl-carousel" data-options="{items: 1, navigation: true, pagination: true, rewindNav : true, nav : true, loop : true}">
+                        
+                        <div owl-carousel-item="" ng-repeat="images in post.post.attachments" ng-if="$index > 0">
+                            <img ng-src="{{images.url}}" />
+                            
+                        </div>  
+                        
+                    </data-owl-carousel>  
+                    <!-- end of the nightmare! -->
+
+                </div>
+
+                <div class="product-detail">
+
+                    <div class="row">
+
+                        <div class="small-6 medium-6 large-7 columns">
+                            <h1 itemprop="name" class="product_title entry-title" ng-bind-html="post.post.title">
+                            </h1>
+                        </div>
+
+                        <div class="small-6 medium-6 large-5 columns">
+                            <div class="brand">
+                                <img class="owl-lazy" src="http://preview.meeko.me/wp-content/themes/meeko/img/quizclothing-logo.jpg?c99495">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="small-6 medium-6 large-6 columns">
+
+                            <div class="price">
+                                <p>
+                                    <span class="amount">
+                                        {{ post.post.custom_fields._regular_price | myCurrency }}
+                                    </span>
+
+
+                                <span ng-if="post.post.custom_fields._sale_price == ''"></span>
+
+                                    <span ng-if="post.post.custom_fields._sale_price != ''" class="amount">
+                                        {{ post.post.custom_fields._sale_price | myCurrency }}
+                                    </span>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="small-6 medium-6 large-6 columns">
+
+                            <div class="minisizeguide">
+                                            
+                                <a ng-if="post.post.custom_fields.sizeguide != ''" class="sizeguide" href="javascript:void(0)" data-reveal-id="{{ post.post.custom_fields.sizeguide }}">
+                                     <img src="http://preview.meeko.me/wp-content/themes/meeko/img/size_guide.gif?c99495">size guide
+                                </a>                                
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="small-12 medium-12 large-12 columns">
+                            <div class="hidedetails">
+
+                                <div class="coloravailable">
+
+                                    <h3>Colours available</h3>
+
+                                </div>
+
+                                <div class="clear"></div>
+
+                                <div class="sizeavailable">
+                                    <h3>Sizes available</h3>
+
+                                </div>
+
+                                <div class="productdescription">
+
+                                    <div ng-bind-html="post.post.content"></div>
+
+                                </div>
+                            </div>
+
+                            <div class="buynowaffiliate">
+                                <a class="addtobag" rel="nofollow" data-reveal-id="buyNow" href="javascript:void(0)">Buy Now</a>
+                            </div>
+
+                            <div id="buyNow" class="meekoredirect reveal-modal small" style="margin-top: 150px; z-index: 50000;" data-reveal="">
+
+                                <h3>We are redirecting you to...</h3>
+                                <p><img src="http://preview.meeko.me/wp-content/themes/meeko/img/quizclothing-logo.jpg?c99495"></p>
+                                <p><strong>Navy Floral Print Pleat Skater Dress</strong></p> <a class="close-reveal-modal">×</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
