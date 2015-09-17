@@ -1,6 +1,6 @@
 var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSanitize'])
 
-var meekoApi = 'http://localhost/meeko';
+var meekoApi = 'http://preview.meeko.me/';
 
 // sorts currency and removes [" "] around the number, then adds £
 angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
