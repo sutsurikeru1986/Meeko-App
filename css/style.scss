@@ -38,8 +38,7 @@
 }
 
 #productdetail {
-    padding-bottom: 75px;
-    
+    //padding-bottom: 75px;
         .product-images {
             text-align: center;
                 .gallery {
@@ -67,22 +66,48 @@
     }
 }
 
-#meekomagazine .magazineitem .magazineauthorhome {
-    padding: 10px 0 15px;
-    float: left;
-    width: 100%;
-    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1)!important;
-    margin-bottom: 0 !important;
-    background: #fff;
+#meekomagazine {
+    .magazineitem {
+        box-shadow: none !important;
+        width: 100%;
+         .magazinedetailalt {
+            h1 {
+                padding: 0 10px 0 10px !important;
+            }
+         }
+        .magazineauthorhome {
+            padding: 10px 0 15px;
+            float: left;
+            width: 100%;
+            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1)!important;
+            margin-bottom: 0 !important;
+            background: #fff;
+        }        
+    }
 }
 
-#meekomagazine .magazineitem .magazinedetailalt h1 {
-    padding: 0 10px 0 10px !important;
+#mayalsolike {
+    .relatedbg {
+        margin-top: 0;
+        padding: 20px 0 10px;
+    }
 }
 
-#meekomagazine .magazineitem {
-    box-shadow: none !important;
-    width: 100%;
+.recommendgrid {
+    height: auto!important;
+    .dressprice {
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.relateddresses {
+    .owl-carousel {
+        .owl-item {
+            height: auto; 
+        }
+    }
 }
 
 .masonrycontainer {
@@ -93,12 +118,11 @@
     column-count: 2;
     column-gap: 10px;
     width: 100%;
-}
-
-.masonrycontainer li {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 10px !important;
+        li {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 10px !important;
+        }
 }
 
 .meekomagcats {
