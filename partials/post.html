@@ -9,7 +9,6 @@
             
                                 <img src="{{ post.post.thumbnail_images.full.url ? post.post.thumbnail_images.full.url : post.post.custom_fields.meekopin.join(', ') }}" /> 
                                 
-                          
                                 <div class="magazinefull">
                                     <h1 ng-bind-html="post.post.title"></h1>
                                 </div>
@@ -26,7 +25,7 @@
                 <div class="row">
                     <div class="large-offset-1 large-10 large-offset-1 columns">
                         <div class="magazineitem fullwidthmagazine">
-                            <div class="magazinecontent" ng-bind-html="post.post.content">                            </div>
+                            <div class="magazinecontent" ng-bind-html="post.post.content">                               </div>
                         </div>
                     </div>
                 </div>
