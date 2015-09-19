@@ -1,21 +1,36 @@
-<h1>{{ post.post.title }}</h1>
-
-<p ng-if="post.post.attachments[0].url"><img src="{{ post.post.attachments[0].url }}" /></p>
-
-<p>
-	{{ post.post.date }} 
-	in 
-	<a href="/magazine/{{ post.post.categories[0].slug }}">{{ post.post.categories[0].title }}</a>
-</p>
-
-<div ng-bind-html="post.post.content"></div>
-
-<div ng-repeat="comment in comments" style="border-bottom:1px solid #999; margin-bottom:40px;">
-	<div>
-		By <span ng-bind-html="comment.name"></span>
-		on <span ng-bind-html="comment.date"></span>
-	</div>
-	<div ng-bind-html="comment.content"></div>
+<div id="meekomagazine">
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="magazinewrapper">
+                <div class="row">
+                    <div class="large-offset-1 large-10 large-offset-1 columns">
+                        <div class="magazineitem fullwidthmagazine">
+                            <div class="imagepreview">
+            
+                                <img src="{{ post.post.thumbnail_images.full.url ? post.post.thumbnail_images.full.url : post.post.custom_fields.meekopin.join(', ') }}" /> 
+                                
+                          
+                                <div class="magazinefull">
+                                    <h1 ng-bind-html="post.post.title"></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="magazinewrapper">
+                <div class="row">
+                    <div class="large-offset-1 large-10 large-offset-1 columns">
+                        <div class="magazineitem fullwidthmagazine">
+                            <div class="magazinecontent" ng-bind-html="post.post.content">                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<p><a href="/magazine">Back to the Magazine</a></p>
