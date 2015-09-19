@@ -37,10 +37,8 @@
 [class*="block-grid-"] {
   margin: 0 !important; }
 
-#productdetail {
-  padding-bottom: 75px; }
-  #productdetail .product-images {
-    text-align: center; }
+#productdetail .product-images {
+  text-align: center; }
 
 #meekoLatestProducts {
   padding-bottom: 50px; }
@@ -53,20 +51,30 @@
   moz-border-radius: 5px;
   border-radius: 5px; }
 
-#meekomagazine .magazineitem .magazineauthorhome {
-  padding: 10px 0 15px;
-  float: left;
-  width: 100%;
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1) !important;
-  margin-bottom: 0 !important;
-  background: #fff; }
-
-#meekomagazine .magazineitem .magazinedetailalt h1 {
-  padding: 0 10px 0 10px !important; }
-
 #meekomagazine .magazineitem {
   box-shadow: none !important;
   width: 100%; }
+  #meekomagazine .magazineitem .magazinedetailalt h1 {
+    padding: 0 10px 0 10px !important; }
+  #meekomagazine .magazineitem .magazineauthorhome {
+    padding: 10px 0 15px;
+    float: left;
+    width: 100%;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1) !important;
+    margin-bottom: 0 !important;
+    background: #fff; }
+
+#mayalsolike .relatedbg {
+  margin-top: 0;
+  padding: 20px 0 10px; }
+
+.recommendgrid {
+  height: auto !important; }
+  .recommendgrid .dressprice p {
+    margin: 0; }
+
+.relateddresses .owl-carousel .owl-item {
+  height: auto; }
 
 .masonrycontainer {
   -moz-column-count: 2;
@@ -76,11 +84,10 @@
   column-count: 2;
   column-gap: 10px;
   width: 100%; }
-
-.masonrycontainer li {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 10px !important; }
+  .masonrycontainer li {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px !important; }
 
 .meekomagcats h3 {
   font-family: "Open Sans", arial;
