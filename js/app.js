@@ -66,9 +66,13 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
         controller: 'ProductList'
     })    
     .when('/product/:productcategory', {
-        templateUrl: '/partials/blog.html',
+        templateUrl: '/partials/productListCat.html',
         controller: 'ProductList'
     })
+    .when('/product/:productcategory/page/:page', {
+        templateUrl: '/partials/productListCat.html',
+        controller: 'ProductList'
+    })    
     .when('/product/:productcategory/:post', {
         templateUrl: '/partials/ProductDetails.html',
         controller: 'ProductDetails'
@@ -216,7 +220,24 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
         /**
          *  Get posts from a specific category by passing in the slug
          */
-        var url = $http.get(meekoApi + '/api/get_category_posts/?custom_fields=all&slug=' + $routeParams.productcategory);
+        $scope.loader.loading = true;
+        
+        var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory);
+        
+            var capsdresscategory = $routeParams.productcategory
+            
+            var CapsDressCategoryup = capsdresscategory.replace(/^[a-z]/, function(m){ return m.toUpperCase() });
+        
+            // Set a default paging value
+            $scope.page = 1;
+            // Set a default next value
+            $scope.next = 2;        
+    
+            // Inject the title into the rootScope
+            $rootScope.title = CapsDressCategoryup + ' Dresses | Meeko';
+        
+            $rootScope.categorytitledresses = CapsDressCategoryup;
+        
     }
     else
     {
@@ -264,12 +285,15 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
         if($routeParams.page)
         {
+            
+            $rootScope.categorytitledresses = $routeParams.productcategory;
+            
             // Get current page
             $scope.page = $routeParams.page;
             // Caluculate next/previous values
             $scope.next = parseInt($routeParams.page)+1;
             $scope.prev = parseInt($routeParams.page)-1;
-        };
+        };   
         
     })
     .error(function(data, status, headers, config){
@@ -280,7 +304,6 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
 .controller('BlogPost', function($scope, $rootScope, $http, $routeParams){
 
-    
     $scope.loader = { 
         loading: true,
     };
@@ -328,6 +351,10 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 })
 
 .controller('RandomProducts', function($scope, $http){
+    
+    $scope.loader = { 
+        loading: true,
+    };
 
     /**
      *  This method just gets the categories available to us and 
@@ -337,6 +364,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
     .success(function(data, status, headers, config){
         $scope.posts = data.posts;
         console.log ( $scope.posts );
+        $scope.loader.loading = true;
     })
     .error(function(data, status, headers, config){
         window.alert("Unable to get categories from Meeko");
