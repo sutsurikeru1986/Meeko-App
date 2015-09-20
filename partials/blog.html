@@ -7,6 +7,27 @@
 
             <div class="magazinehome">
                 
+                <div ng-hide="loader.loading" class="row">
+
+                    <div class="small-12 medium-12 large-12 columns">
+
+                        <div class="breadcrumb-wishlist productheader">
+
+                            <div class="row">
+
+                                <div class="small-12 medium-10 large-10 columns" itemprop="breadcrumb">
+                                    <p>
+                                        <a class="home" href="http://localhost">Home</a> / <span> Magazine</span></p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>                       
+                
                 <div class="row">
 
                     <div class="small-12 columns">
@@ -14,7 +35,6 @@
                         <div ng-hide="loader.loading">
 
                             <div ng-controller="CategoryList" class="meekomagcats">
-                                <h3>Magazine Categories</h3>
                                 <ul>
                                     <li ng-repeat="category in categories"><a href="/magazine/{{ category.slug }}">{{ category.title }}</a></li>
                                 </ul>
@@ -83,8 +103,12 @@
         
     </div>
     
-</section>                    
+</section>       
 
-<a ng-show="prev > 0" href="/magazine/page/{{ prev }}">Prev</a> |
-Page {{ page }} of {{paging.pages}} | 
-<a ng-show="next <= paging.pages" href="/blog/page/{{ next }}">Next</a>
+<div ng-hide="loader.loading">
+    
+    <a ng-show="prev > 0" href="/magazine/page/{{ prev }}">Prev</a> |
+    Page {{ page }} of {{paging.pages}} | 
+    <a ng-show="next <= paging.pages" href="/blog/page/{{ next }}">Next</a>
+    
+</div>
