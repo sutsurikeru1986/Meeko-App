@@ -37,6 +37,33 @@
 [class*="block-grid-"] {
   margin: 0 !important; }
 
+#header {
+  padding: 8px 0;
+  position: fixed;
+  height: 74px; }
+  #header .logo {
+    margin: 0; }
+    #header .logo img {
+      width: auto; }
+
+.activetab {
+  border-bottom: 2px solid #FFF !important;
+  font-weight: bold;
+  color: #FFF !important; }
+
+#mobilemeekohome {
+  padding: 66px 0 10px;
+  background-color: #D73F7C;
+  background-image: linear-gradient(to top right, #D73F7C, #FF8270); }
+  #mobilemeekohome .mobilequicktab .mobiletab p a {
+    font-size: 12px;
+    color: #fff;
+    font-weight: normal; }
+    #mobilemeekohome .mobilequicktab .mobiletab p a:active, #mobilemeekohome .mobilequicktab .mobiletab p a:focus {
+      color: #FFF !important;
+      border-bottom: 2px solid #fff !important;
+      font-weight: normal; }
+
 #productdetail .product-images {
   text-align: center; }
 
@@ -51,18 +78,20 @@
   moz-border-radius: 5px;
   border-radius: 5px; }
 
-#meekomagazine .magazineitem {
-  box-shadow: none !important;
-  width: 100%; }
-  #meekomagazine .magazineitem .magazinedetailalt h1 {
-    padding: 0 10px 0 10px !important; }
-  #meekomagazine .magazineitem .magazineauthorhome {
-    padding: 10px 0 15px;
-    float: left;
-    width: 100%;
-    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1) !important;
-    margin-bottom: 0 !important;
-    background: #fff; }
+#meekomagazine {
+  margin: 0; }
+  #meekomagazine .magazineitem {
+    box-shadow: none !important;
+    width: 100%; }
+    #meekomagazine .magazineitem .magazinedetailalt h1 {
+      padding: 0 10px 0 10px !important; }
+    #meekomagazine .magazineitem .magazineauthorhome {
+      padding: 10px 0 15px;
+      float: left;
+      width: 100%;
+      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1) !important;
+      margin-bottom: 0 !important;
+      background: #fff; }
 
 #mayalsolike .relatedbg {
   margin-top: 0;
@@ -73,8 +102,10 @@
   .recommendgrid .dressprice p {
     margin: 0; }
 
-.relateddresses .owl-carousel .owl-item {
-  height: auto; }
+.relateddresses {
+  padding-bottom: 0; }
+  .relateddresses .owl-carousel .owl-item {
+    height: auto; }
 
 .masonrycontainer {
   -moz-column-count: 2;
@@ -107,8 +138,39 @@
       background: #FE1880;
       color: #fff;
       border-radius: 5px; }
-      .meekomagcats ul li a:focus, .meekomagcats ul li a:active {
+      .meekomagcats ul li a:focus, .meekomagcats ul li a:active, .meekomagcats ul li a:hover {
         background: #fff;
         color: #FE1880; }
+
+#mobilemeekohome .mobilequicktab .mobiletab p a:focus, #mobilemeekohome .mobilequicktab .mobiletab p a:hover, #mobilemeekohome .mobilequicktab .mobiletab p a:active {
+  border-bottom: 2px solid #fff;
+  font-weight: normal;
+  color: #fff !important; }
+
+#meekoLatestProducts .breadcrumb-wishlist, .magazinehome .breadcrumb-wishlist {
+  padding: 10px 5px; }
+  #meekoLatestProducts .breadcrumb-wishlist p, .magazinehome .breadcrumb-wishlist p {
+    margin: 0;
+    font-size: 11px;
+    font-family: "open sans", arial;
+    color: #646473;
+    text-transform: uppercase; }
+    #meekoLatestProducts .breadcrumb-wishlist p a, .magazinehome .breadcrumb-wishlist p a {
+      color: #646473;
+      text-decoration: underline; }
+#meekoLatestProducts .productheader, .magazinehome .productheader {
+  background: #FCFCFC; }
+
+.latestbg {
+  background: #FCFCFC; }
+
+.ajax-loader-meeko-app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url("http://preview.meeko.me/wp-content/themes/meeko/img/ring.gif?86c610") scroll no-repeat 50% 50% transparent;
+  width: 100%;
+  height: 100%;
+  z-index: 99999; }
 
 /*# sourceMappingURL=style.css.map */
