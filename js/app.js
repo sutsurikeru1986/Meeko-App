@@ -80,6 +80,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
      $locationProvider.html5Mode(true).hashPrefix('!');
 }])
 
+
 /**
  *
  *	On runtime define the page titles for injecting into the page <title> tag
@@ -119,6 +120,10 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 })
 
 .controller('BlogList', function($scope, $rootScope, $http, $routeParams){
+    
+    $scope.loader = { 
+        loading: false,
+    };
 
     /** 
      *  Get the parameter passed into the controller (if it exists)
@@ -149,6 +154,8 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
             /**
              *  If no parameter supplied, just get all posts
              */
+            
+            $scope.loader.loading = true ;
             var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all');
 
             // Set a default paging value
@@ -171,6 +178,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
          */
         $scope.posts = data.posts;
         $scope.paging = data;
+         $scope.loader.loading = false;
         //console.log(data);
 
         // Inject the title into the rootScope
@@ -193,6 +201,11 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
 .controller('ProductList', function($scope, $rootScope, $http, $routeParams){
 
+     $scope.loader = { 
+
+      loading : false ,
+
+     };
     /** 
      *  Get the parameter passed into the controller (if it exists)
      *  and then construct the GET URL. If parameter exists, the user
@@ -212,6 +225,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
             /**
              *  If a page parameter has been passed, send this to the API
              */
+            $scope.loader.loading = true;
             var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page=' + $routeParams.page);
         }
         else
@@ -219,6 +233,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
             /**
              *  If no parameter supplied, just get all posts
              */
+            $scope.loader.loading = true ;
             var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all');
 
             // Set a default paging value
@@ -241,6 +256,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
          */
         $scope.posts = data.posts;
         $scope.paging = data;
+        $scope.loader.loading = false ; 
         //console.log(data);
 
         // Inject the title into the rootScope
@@ -264,6 +280,10 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
 .controller('BlogPost', function($scope, $rootScope, $http, $routeParams){
 
+    
+    $scope.loader = { 
+        loading: true,
+    };
     /**
      *  Call the get_post method from the API and pass to it the 
      *  value of $routeParams.post, which is actually the post slug
@@ -275,6 +295,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
         // Inject the title into the rootScope
         $rootScope.title = data.post.title;
+        $scope.loader.loading = false;
     })
     .error(function(data, status, headers, config){
         window.alert("Unable to get magazine posts from Meeko");
@@ -284,6 +305,9 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
 .controller('ProductDetails', function($scope, $rootScope, $http, $routeParams){
 
+    $scope.loader = { 
+        loading: true,
+    };
     /**
      *  Call the get_post method from the API and pass to it the 
      *  value of $routeParams.post, which is actually the post slug
@@ -295,6 +319,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
         // Inject the title into the rootScope
         $rootScope.title = data.post.title;
+        $scope.loader.loading = false;
     })
     .error(function(data, status, headers, config){
         window.alert("Unable to get dress details from Meeko");
