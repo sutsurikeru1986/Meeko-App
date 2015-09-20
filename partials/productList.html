@@ -7,6 +7,8 @@
 
 <section id="meekoLatestProducts">
     
+    <div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
+    
     <div class="row">
 
         <div class="small-12 columns">
@@ -15,8 +17,9 @@
 
                 <li ng-repeat="post in posts">
 
-                    <div id="product_300" class="categoryarchivegrid">
-                        <div id="product_300" class="item-content">      
+                    <div class="categoryarchivegrid">
+                        
+                        <div class="item-content">      
 
                             <div class="dressimg">
                                 <a href="/product/{{ post.taxonomy_product_cat[0].slug }}/{{ post.slug }}">
@@ -63,14 +66,18 @@
                 </li>
 
             </ul>
+            
+            <div ng-hide="loader.loading">
+                
+                <div class="pagination view-animate">
 
-            <div class="pagination view-animate">
+                    <a ng-show="prev > 0" href="/product/page/{{ prev }}">Prev</a> |
+                    Page {{ page }} of {{paging.pages}} | 
+                    <a ng-show="next <= paging.pages" href="/product/page/{{ next }}">Next</a>
 
-                <a ng-show="prev > 0" href="/product/page/{{ prev }}">Prev</a> |
-                Page {{ page }} of {{paging.pages}} | 
-                <a ng-show="next <= paging.pages" href="/product/page/{{ next }}">Next</a>
-
-            </div>    
+                </div> 
+                
+            </div>
 
         </div>
 
