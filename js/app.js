@@ -1,6 +1,6 @@
 var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSanitize'])
 
-var meekoApi = 'http://preview.meeko.me/';
+var meekoApi = 'http://localhost/meeko';
 
 // sorts currency and removes [" "] around the number, then adds £
 angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
@@ -298,6 +298,23 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
     })
     .error(function(data, status, headers, config){
         window.alert("Unable to get dress details from Meeko");
+    })
+
+})
+
+.controller('RandomProducts', function($scope, $http){
+
+    /**
+     *  This method just gets the categories available to us and 
+     *  makes them available through CategoryList controller
+     */
+    $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&count=10&orderby=rand')
+    .success(function(data, status, headers, config){
+        $scope.posts = data.posts;
+        console.log ( $scope.posts );
+    })
+    .error(function(data, status, headers, config){
+        window.alert("Unable to get categories from Meeko");
     })
 
 })
