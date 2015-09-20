@@ -10,17 +10,23 @@
                 <div class="row">
 
                     <div class="small-12 columns">
+                        
+                        <div ng-hide="loader.loading">
 
-                        <div ng-controller="CategoryList" class="meekomagcats">
-                            <h3>Magazine Categories</h3>
-                            <ul>
-                                <li ng-repeat="category in categories"><a href="/magazine/{{ category.slug }}">{{ category.title }}</a></li>
-                            </ul>
+                            <div ng-controller="CategoryList" class="meekomagcats">
+                                <h3>Magazine Categories</h3>
+                                <ul>
+                                    <li ng-repeat="category in categories"><a href="/magazine/{{ category.slug }}">{{ category.title }}</a></li>
+                                </ul>
+                            </div>
+                            
                         </div>
 
                     </div>
 
                 </div>
+                
+                <div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
 
                 <div class="row">
 
