@@ -1,6 +1,6 @@
-<section id="productdetail">
-    
-    <div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
+<div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
+
+<section ng-hide="loader.loading" id="productdetail">
     
     <div class="row">
         
@@ -12,7 +12,7 @@
                     
                     <div class="small-12 medium-10 large-10 columns" itemprop="breadcrumb">
                         <p>
-                            <a class="home" href="http://localhost">Home</a> / <a href="http://preview.meeko.me/product-category/day/">{{ post.post.taxonomy_product_cat[0].title }}</a> /  <span ng-bind-html="post.post.title"></span></p>
+                            <a class="home" href="http://localhost">Home</a> / <a href="/product/{{ post.post.taxonomy_product_cat[0].slug }}">{{ post.post.taxonomy_product_cat[0].title }}</a> /  <span ng-bind-html="post.post.title"></span></p>
                     </div>
                     
                 </div>
@@ -129,7 +129,7 @@
 
                                 <h3>We are redirecting you to...</h3>
                                 <p><img src="http://preview.meeko.me/wp-content/themes/meeko/img/quizclothing-logo.jpg?c99495"></p>
-                                <p><strong>Navy Floral Print Pleat Skater Dress</strong></p> <a class="close-reveal-modal">×</a>
+                                <p><strong ng-bind-html="post.post.title"></strong></p> <a class="close-reveal-modal">×</a>
 
                             </div>
                         </div>
