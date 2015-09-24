@@ -18,6 +18,18 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
   };
 }])
 
+meekoApp.filter('prevDress', function () {
+    return function (text) {
+        return escape(text).replace("http%3A//localhost/meeko/product/", "product/prev/");
+    };
+})
+
+meekoApp.filter('nextDress', function () {
+    return function (text) {
+        return escape(text).replace("http%3A//localhost/meeko/product/", "product/next/");
+    };
+})
+
 /**
  *
  *	Configure our app
@@ -76,7 +88,17 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
     .when('/product/:productcategory/:post', {
         templateUrl: '/partials/ProductDetails.html',
         controller: 'ProductDetails'
-    });        
+    })
+    .when('/product/prev/:postnocat', {
+        templateUrl: '/partials/ProductDetails.html',
+        controller: 'ProductDetails'
+    })   
+    .when('/product/next/:postnocat', {
+        templateUrl: '/partials/ProductDetails.html',
+        controller: 'ProductDetails'
+    });     
+    
+    
 
     /**
      *	Remove # from the URL with $locationProvider
@@ -326,7 +348,7 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
 
 })
 
-.controller('ProductDetails', function($scope, $rootScope, $http, $routeParams){
+.controller('ProductDetails', function($scope, $rootScope, $http, $routeParams, $filter){
 
     $scope.loader = { 
         loading: true,
@@ -335,14 +357,40 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
      *  Call the get_post method from the API and pass to it the 
      *  value of $routeParams.post, which is actually the post slug
      */
-    $http.get(meekoApi + '/api/get_post/?post_type=product&custom_fields=all&slug=' + $routeParams.post)
+
+    if($routeParams.postnocat)
+    {
+        /**
+         *  Get posts from a specific category by passing in the slug
+         */
+        var url = $http.get(meekoApi + '/api/get_post/?post_type=product&custom_fields=all&slug=' + $routeParams.postnocat);
+        
+    }
+    
+     else
+        {
+            /**
+             *  If no parameter supplied, just get all posts
+             */
+            $scope.loader.loading = true ;
+            var url =  $http.get(meekoApi + '/api/get_post/?post_type=product&custom_fields=all&slug=' + $routeParams.post)
+
+            // Set a default paging value
+            $scope.page = 1;
+            // Set a default next value
+            $scope.next = 2;
+
+            // Inject the title into the rootScope
+            $rootScope.title = 'Dresses | Meeko';
+        }
+    url
     .success(function(data, status, headers, config){
         $scope.post = data;
-        $scope.comments = data.post.comments;   
 
         // Inject the title into the rootScope
         $rootScope.title = data.post.title;
-        $scope.loader.loading = false;
+        $scope.loader.loading = false;        
+        
     })
     .error(function(data, status, headers, config){
         window.alert("Unable to get dress details from Meeko");
@@ -364,7 +412,8 @@ angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
     .success(function(data, status, headers, config){
         $scope.posts = data.posts;
         console.log ( $scope.posts );
-        $scope.loader.loading = true;
+        
+        $scope.loader.loading = false;
     })
     .error(function(data, status, headers, config){
         window.alert("Unable to get categories from Meeko");

@@ -1,11 +1,7 @@
 {
   "name": "meeko-dresses",
   "version": "1.0.0",
-  "repository": "https://github.com/sutsurikeru1986/MeekoApp.git",
-  "license": "NONE",
-
   "dependencies": {
-    "angular": "1.4.x",
     "ng-repeat-owl-carousel": "0.0.2"
   },
   "devDependencies": {

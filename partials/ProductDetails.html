@@ -1,6 +1,8 @@
 <div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
 
-<section ng-hide="loader.loading" id="productdetail">
+
+<span ng-hide="loader.loading">
+<section id="productdetail">
     
     <div class="row">
         
@@ -119,6 +121,13 @@
                                     <div ng-bind-html="post.post.content"></div>
 
                                 </div>
+                                
+                                <div class="nextdressmeeko">
+                                  
+                                    <a href="{{ post.next_url | nextDress }}">Next dress</a> | <a href="{{ post.previous_url | prevDress }}">Previous dress</a>
+                                        
+                                </div>
+                                
                             </div>
 
                             <div class="buynowaffiliate">
@@ -147,7 +156,7 @@
 
 </section>
 
-<section id="mayalsolike">
+<section id="mayalsolike" ng-hide="loader.loading">
 
     <div class="row">
 
@@ -162,12 +171,13 @@
         </div>
 
     </div>
+    </span>
 
     <div class="row">
 
         <div class="large-12 columns">
 
-            <div ng-controller="RandomProducts" class="relateddresses">
+            <div ng-controller="RandomProducts" class="relateddresses" ng-hide="loader.loading">
 
                 <data-owl-carousel class="owl-carousel" data-options="{items: 2, navigation: true, pagination: true, rewindNav : true, nav : true, loop : true}">
 
