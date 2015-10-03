@@ -46,7 +46,7 @@
 
                 </div>
 
-                <div class="product-detail">
+                <div class="product-detail" ng-swipe-left="swipeProductLeft()" ng-swipe-right="swipeProductright()">
 
                     <div class="row">
 
@@ -105,14 +105,23 @@
 
                                     <h3>Colours available</h3>
                                     
-                                    <!--<p>{{ post.post.custom_fields._product_attributes }}</p>-->
-
+                                      <ul>
+                                        <li rel="nofollow" data-reveal-id="buyNow" ng-repeat="colour in colours" class="{{ colour }}" ng-click="buyDress()"></li>  
+                                        </li>
+                                      </ul>
+    
                                 </div>
 
                                 <div class="clear"></div>
 
                                 <div class="sizeavailable">
                                     <h3>Sizes available</h3>
+                                    
+                                      <ul>
+                                        <li rel="nofollow" data-reveal-id="buyNow" ng-repeat="size in sizes">
+                                          <a rel="nofollow" data-reveal-id="buyNow" href="javascript:void(0)" ng-click="buyDress()">{{ size }}</a>
+                                        </li>
+                                      </ul>
 
                                 </div>
 
@@ -122,16 +131,10 @@
 
                                 </div>
                                 
-                                <div class="nextdressmeeko">
-                                  
-                                    <a href="{{ post.next_url | nextDress }}">Next dress</a> | <a href="{{ post.previous_url | prevDress }}">Previous dress</a>
-                                        
-                                </div>
-                                
                             </div>
 
                             <div class="buynowaffiliate">
-                                <a class="addtobag" rel="nofollow" data-reveal-id="buyNow" href="javascript:void(0)">Buy Now</a>
+                                <a class="addtobag" rel="nofollow" data-reveal-id="buyNow" href="javascript:void(0)" ng-click="buyDress()">Buy Now</a>
                             </div>
 
                             <div id="buyNow" class="meekoredirect reveal-modal small" style="margin-top: 150px; z-index: 50000;" data-reveal="">
@@ -156,7 +159,7 @@
 
 </section>
 
-<section id="mayalsolike" ng-hide="loader.loading">
+<section id="mayalsolike" ng-hide="loader.loading" ng-swipe-left="swipeProductLeft()" ng-swipe-right="swipeProductright()">
 
     <div class="row">
 
@@ -179,9 +182,14 @@
 
             <div ng-controller="RandomProducts" class="relateddresses" ng-hide="loader.loading">
 
-                <data-owl-carousel class="owl-carousel" data-options="{items: 2, navigation: true, pagination: true, rewindNav : true, nav : true, loop : true}">
+                <!--<data-owl-carousel class="owl-carousel" data-options="{items: 2, navigation: true, pagination: true, rewindNav : true, nav : true, loop : true}">-->
 
-                    <div class="recommendgrid" owl-carousel-item="" ng-repeat="post in posts" ng-if="$index < 10">
+                
+                <ul class="small-block-grid-2 latestbg">
+
+                    <li class="recommendgrid" ng-repeat="post in posts">
+                    
+                    <!--<div class="recommendgrid" owl-carousel-item="" ng-repeat="post in posts" ng-if="$index < 10">-->
 
                         <div class="item-content">
 
@@ -203,7 +211,6 @@
                                         {{ post.custom_fields._regular_price | myCurrency }}
                                     </span>
 
-
                                 <span ng-if="post.custom_fields._sale_price == ''"></span>
 
                                     <span ng-if="post.custom_fields._sale_price != ''" class="amount">
@@ -214,13 +221,24 @@
 
                         </div>
 
-                    </div>
+                    </li>
+                    
+                </ul>
 
-                </data-owl-carousel>
+               <!--</data-owl-carousel>-->
 
             </div>
 
         </div>
+
+    </div>
+    
+    <div id="noMoreDressesFound" class="meekoredirect reveal-modal small" style="margin-top: 150px; z-index: 50000;" data-reveal aria-labelledby="noMoreDressesFound" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">Oh no!</h2>
+
+        <p>We have no more new Dresses to display! More are added daily so keep checking back.</p>
+
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 
     </div>
 

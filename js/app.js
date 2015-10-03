@@ -1,6 +1,111 @@
-var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSanitize'])
+$(window).bind("load", function () {
+    $(document).foundation();
+});
 
 var meekoApi = 'http://localhost/meeko';
+var partialLocation = 'http://localhost/partials/';
+var environmentUrl = '/';
+
+var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource', 'ngSanitize', 'ngTouch'])
+
+
+
+/**
+ *
+ *	Configure our app
+ *
+ */
+
+
+
+.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider)
+{
+	/**
+	 *	Configure routes
+	 */
+    $routeProvider
+    .when(environmentUrl , {
+        templateUrl: partialLocation + 'index.html'
+        //controller: 'GetPage'
+    })
+    .when(environmentUrl + 'magazine/', {
+        templateUrl: partialLocation + 'blog.html',
+        controller: 'BlogList'
+    })
+    .when(environmentUrl + 'magazine/page/:page', {
+        templateUrl: partialLocation + 'blog.html',
+        controller: 'BlogList'
+    })
+    .when(environmentUrl + 'magazine/:category', {
+        templateUrl: partialLocation + 'blog.html',
+        controller: 'BlogList'
+    })
+    .when(environmentUrl + 'magazine/:category/:post', {
+        templateUrl: partialLocation + 'post.html',
+        controller: 'BlogPost'
+    })
+    .when(environmentUrl + 'search', {
+        templateUrl: partialLocation + 'searchresults.html',
+        controller: 'searchResults'
+    })    
+    .when(environmentUrl + 'search/page/:page', {
+        templateUrl: partialLocation + 'searchresults.html',
+        controller: 'searchResults'
+    })    
+    .when(environmentUrl + 'product/', {
+        templateUrl: partialLocation + 'productList.html',
+        controller: 'ProductList'
+    })
+    .when(environmentUrl + 'product/page/:page', {
+        templateUrl: partialLocation + 'productList.html',
+        controller: 'ProductList'
+    })    
+    .when(environmentUrl + 'product/:productcategory', {
+        templateUrl: partialLocation + 'productListCat.html',
+        controller: 'ProductList'
+    })
+    .when(environmentUrl + 'product/:productcategory/page/:page', {
+        templateUrl: partialLocation + 'productListCat.html',
+        controller: 'ProductList'
+    })    
+    .when(environmentUrl + 'product/:productcategory/:post', {
+        templateUrl: partialLocation + 'ProductDetails.html',
+        controller: 'ProductDetails'
+    })
+    .when(environmentUrl + 'product/prev/:postnocat', {
+        templateUrl: partialLocation + 'ProductDetails.html',
+        controller: 'ProductDetails'
+    })   
+    .when(environmentUrl + 'product/next/:postnocat', {
+        templateUrl: partialLocation + 'ProductDetails.html',
+        controller: 'ProductDetails'
+    })    
+    .when(environmentUrl + 'about/', {
+        templateUrl: partialLocation + 'ProductList.html',
+        controller: 'ProductList'
+    })         
+    .otherwise({
+        redirectTo: environmentUrl
+    });   
+    
+     /**
+     *	Sampling caching everything to see how the performance is impacted
+     */   
+     $httpProvider.defaults.cache = false;
+    
+    /**
+     *	Remove # from the URL with $locationProvider
+     */
+     $locationProvider.html5Mode(true).hashPrefix('!');
+}])
+
+
+
+/**
+ *
+ *	Filters to be applied in controllers
+ *
+ */
 
 // sorts currency and removes [" "] around the number, then adds £
 angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
@@ -30,82 +135,6 @@ meekoApp.filter('nextDress', function () {
     };
 })
 
-/**
- *
- *	Configure our app
- *
- */
-.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider)
-{
-	/**
-	 *	Configure routes
-	 */
-    $routeProvider
-    .when('/', {
-        templateUrl: '/partials/index.html'
-        //controller: 'GetPage'
-    })
-    .when('/magazine', {
-        templateUrl: '/partials/blog.html',
-        controller: 'BlogList'
-    })
-    .when('/magazine/page/:page', {
-        templateUrl: '/partials/blog.html',
-        controller: 'BlogList'
-    })
-    .when('/magazine/:category', {
-        templateUrl: '/partials/blog.html',
-        controller: 'BlogList'
-    })
-    .when('/magazine/:category/:post', {
-        templateUrl: '/partials/post.html',
-        controller: 'BlogPost'
-    })
-    .when('/search', {
-        templateUrl: '/partials/searchresults.html',
-        controller: 'searchResults'
-    })    
-    .when('/search/page/:page', {
-        templateUrl: '/partials/searchresults.html',
-        controller: 'searchResults'
-    })    
-    .when('/product/', {
-        templateUrl: '/partials/productList.html',
-        controller: 'ProductList'
-    })
-    .when('/product/page/:page', {
-        templateUrl: '/partials/productList.html',
-        controller: 'ProductList'
-    })    
-    .when('/product/:productcategory', {
-        templateUrl: '/partials/productListCat.html',
-        controller: 'ProductList'
-    })
-    .when('/product/:productcategory/page/:page', {
-        templateUrl: '/partials/productListCat.html',
-        controller: 'ProductList'
-    })    
-    .when('/product/:productcategory/:post', {
-        templateUrl: '/partials/ProductDetails.html',
-        controller: 'ProductDetails'
-    })
-    .when('/product/prev/:postnocat', {
-        templateUrl: '/partials/ProductDetails.html',
-        controller: 'ProductDetails'
-    })   
-    .when('/product/next/:postnocat', {
-        templateUrl: '/partials/ProductDetails.html',
-        controller: 'ProductDetails'
-    });     
-    
-    
-
-    /**
-     *	Remove # from the URL with $locationProvider
-     */
-     $locationProvider.html5Mode(true).hashPrefix('!');
-}])
-
 
 /**
  *
@@ -118,6 +147,8 @@ meekoApp.filter('nextDress', function () {
        return route === $location.url();
     }
 })
+
+
 
 /**
  *
@@ -144,6 +175,8 @@ meekoApp.filter('nextDress', function () {
     })
 
 })
+
+
 
 .controller('BlogList', function($scope, $rootScope, $http, $routeParams){
     
@@ -220,10 +253,12 @@ meekoApp.filter('nextDress', function () {
         };
     })
     .error(function(data, status, headers, config){
-        window.alert("No magazine posts found on Meeko");
+        //window.alert("No magazine posts found on Meeko");
     })
 
 })
+
+
 
 .controller('ProductList', function($scope, $rootScope, $http, $routeParams){
 
@@ -256,9 +291,21 @@ meekoApp.filter('nextDress', function () {
             $scope.next = 2;        
     
             // Inject the title into the rootScope
-            $rootScope.title = CapsDressCategoryup + ' Dresses | Meeko';
+            $rootScope.title = CapsDressCategoryup + ' Dresses | Meeko.me';
         
             $rootScope.categorytitledresses = CapsDressCategoryup;
+        
+            if($routeParams.page)
+            {
+                var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory + '&page=' + $routeParams.page);
+
+                // Get current page
+                $scope.page = $routeParams.page;
+                // Caluculate next/previous values
+                $scope.next = parseInt($routeParams.page)+1;
+                $scope.prev = parseInt($routeParams.page)-1;
+            };
+        
         
     }
     else
@@ -285,7 +332,7 @@ meekoApp.filter('nextDress', function () {
             $scope.next = 2;
 
             // Inject the title into the rootScope
-            $rootScope.title = 'Dresses | Meeko';
+            $rootScope.title = 'Newest Work & Party Dresses | Meeko.me';
         }
     }
     url
@@ -319,10 +366,12 @@ meekoApp.filter('nextDress', function () {
         
     })
     .error(function(data, status, headers, config){
-        window.alert("no posts");
+        //window.alert("no posts");
     })
 
 })
+
+
 
 .controller('BlogPost', function($scope, $rootScope, $http, $routeParams){
 
@@ -333,7 +382,9 @@ meekoApp.filter('nextDress', function () {
      *  Call the get_post method from the API and pass to it the 
      *  value of $routeParams.post, which is actually the post slug
      */
+    
     $http.get(meekoApi + '/api/get_post/?post_type=magazine&custom_fields=all&slug=' + $routeParams.post)
+    
     .success(function(data, status, headers, config){
         $scope.post = data;
         $scope.comments = data.post.comments;
@@ -342,13 +393,16 @@ meekoApp.filter('nextDress', function () {
         $rootScope.title = data.post.title;
         $scope.loader.loading = false;
     })
+    
     .error(function(data, status, headers, config){
-        window.alert("Unable to get magazine posts from Meeko");
+        //window.alert("Unable to get magazine posts from Meeko");
     })
 
 })
 
-.controller('ProductDetails', function($scope, $rootScope, $http, $routeParams, $filter){
+
+
+.controller('ProductDetails', function($scope, $rootScope, $http, $routeParams, $filter, $location){
 
     $scope.loader = { 
         loading: true,
@@ -389,14 +443,113 @@ meekoApp.filter('nextDress', function () {
 
         // Inject the title into the rootScope
         $rootScope.title = data.post.title;
-        $scope.loader.loading = false;        
+        $scope.loader.loading = false;   
+        
+        
+        $scope.buyDress = function () {
+
+            var reveal = angular.element('#buyNow');
+            reveal.foundation();
+            reveal.foundation('reveal', 'open');
+
+        }
+        
+        
+        $scope.swipeProductLeft = function () {
+            console.log('swipe left triggered');
+            
+            angular.element('#meekoView').addClass('leftswipeclass');
+                          
+            $rootScope.leftDress = data.next_url;
+            console.log($rootScope.leftDres);
+            
+            var leftDressUrl = $rootScope.leftDress;
+            
+            if(leftDressUrl == undefined) {
+                //alert('no products to scroll to');
+
+                 var reveal = angular.element('#noMoreDressesFound');
+                 reveal.foundation();
+                 reveal.foundation('reveal', 'open');
+                
+            }
+                else 
+            {
+                var filterleftDressUrl = $filter('nextDress')(leftDressUrl);
+
+                console.log(filterleftDressUrl);
+                $location.url(filterleftDressUrl);
+                
+            }
+        }; 
+        
+        $scope.swipeProductright = function () {
+            console.log('swipe right triggered');
+
+            $rootScope.rightDress = data.previous_url;
+            
+            var rightDressUrl = $rootScope.rightDress;
+            
+            if(rightDressUrl == undefined) {
+                
+                 var reveal = angular.element('#noMoreDressesFound');
+                 reveal.foundation();
+                 reveal.foundation('reveal', 'open');
+                
+            }
+                else 
+            {            
+                var filterRightDressUrl = $filter('prevDress')(rightDressUrl);
+
+                console.log(filterRightDressUrl);
+                $location.url(filterRightDressUrl);
+            }
+        };          
+                
+        
+        //list sizes using custom field 'sizes' - data has to be entered like this: 8 10 12 14 16 18 
+            var sizes = data.post.custom_fields.sizes;
+        
+            var sizestest = data.post.custom_fields.sizes;
+
+            //sizes = String(sizes).replace(/\"/g, ""); 
+            sizes = sizes.split(" "); 
+
+            console.log(typeof sizes);  
+
+            console.log(sizes);  
+        
+            console.log(sizestest);
+
+            $rootScope.sizes = sizes;
+        
+        //list sizes ends
+        
+        //list colours using custom field 'colours' = data has to entered like this: Navy Cream
+        
+            var colours = data.post.custom_fields.colours;
+
+            colours = String(colours).replace(/\"/g, ""); 
+            colours = colours.split(" "); 
+
+            console.log(typeof colours);  
+
+            console.log(colours);  
+
+            $rootScope.colours = colours;  
+        
+        //list colours ends
+        
+        
         
     })
     .error(function(data, status, headers, config){
-        window.alert("Unable to get dress details from Meeko");
+        //window.alert("Unable to get dress details from Meeko");
     })
 
 })
+
+
 
 .controller('RandomProducts', function($scope, $http){
     
@@ -416,10 +569,12 @@ meekoApp.filter('nextDress', function () {
         $scope.loader.loading = false;
     })
     .error(function(data, status, headers, config){
-        window.alert("Unable to get categories from Meeko");
+        //window.alert("Unable to get categories from Meeko");
     })
 
 })
+
+
 
 .controller('CategoryList', function($scope, $http){
 
@@ -432,10 +587,12 @@ meekoApp.filter('nextDress', function () {
         $scope.categories = data.categories;
     })
     .error(function(data, status, headers, config){
-        window.alert("Unable to get categories from Meeko");
+        //window.alert("Unable to get categories from Meeko");
     })
 
 })
+
+
 
 .controller('CategoryListProduct', function($scope, $http){
 
@@ -449,7 +606,7 @@ meekoApp.filter('nextDress', function () {
         //console.log(data.posts.id);
     })
     .error(function(data, status, headers, config){
-        window.alert("We have been unable to access the feed :-(");
+        //window.alert("We have been unable to access the feed :-(");
     })
 
 })
@@ -518,6 +675,8 @@ meekoApp.filter('nextDress', function () {
 }
 })
 
+
+
 //owl carousel directive to work with ng-repeat - the issue was without this the page would load before the ng-repeat and wouldnt build owl-carousel
 .directive("owlCarousel", function() {
 	return {
@@ -539,6 +698,9 @@ meekoApp.filter('nextDress', function () {
 		}
 	};
 })
+
+
+
 .directive('owlCarouselItem', [function() {
 	return {
 		restrict: 'A',
@@ -551,6 +713,8 @@ meekoApp.filter('nextDress', function () {
 		}
 	};
 }])
+
+
 
 .directive('searchForm', function() {
 	return {

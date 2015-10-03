@@ -15,10 +15,12 @@
     <!-- include AngularJS plus modules -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
     <script type="text/javascript" src="http://preview.meeko.me/wp-content/themes/meeko/js/owl.carousel.min.js"></script>
-    <script src="https://code.angularjs.org/1.2.22/angular-route.min.js"></script>
-    <script src="https://code.angularjs.org/1.2.22/angular-animate.min.js"></script>
-    <script src="https://code.angularjs.org/1.2.22/angular-resource.min.js"></script>
-    <script src="https://code.angularjs.org/1.2.22/angular-sanitize.min.js"></script>
+    <script src="//code.angularjs.org/1.2.22/angular-route.min.js"></script>
+    <script src="//code.angularjs.org/1.2.22/angular-animate.min.js"></script>
+    <script src="//code.angularjs.org/1.2.22/angular-resource.min.js"></script>
+    <script src="//code.angularjs.org/1.2.22/angular-sanitize.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-touch.js"></script>
+    <script src="http://localhost/js/mm-foundation-0.7.0.min.js"></script>
     <script type="text/javascript" src="http://localhost/meeko/wp-content/themes/meeko/js/isotope.pkgd.min.js"></script>
     <script type="text/javascript" src="http://localhost/meeko/wp-content/themes/meeko/js/imagesloaded.js"></script>
     <script type="text/javascript" src="http://localhost/meeko/wp-content/themes/meeko/js/foundation.min.js"></script>
@@ -41,11 +43,12 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?c99495" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/nga.css" />
 
     <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.carousel.css" rel="stylesheet">
     <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.theme.css" rel="stylesheet">
     <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.transitions.css" rel="stylesheet">
-    
+
     <script>
         $(window).bind("load", function () {
             $(document).foundation();
@@ -67,40 +70,68 @@
 
         </div>
     </section>
-
-    <section id="mobilemeekohome">
-        <div class="mobilequicktab" ng-controller="MenuController">
-            <div class="row">
-                <div class="small-4 columns">
-                    <div class="mobiletab">
-                        <p><a class="promos" ng-class="{ activetab:isActive('/') }" class="promos" href="/">Promos</a></p>
-                    </div>
-                </div>
-                <div class="small-4 columns">
-                    <div class="mobiletab">
-                        <p><a class="latestmeekomobile" ng-class="{ activetab:isActive('/product/') }" href="/product/">Latest Arrivals</a></p>
-                    </div>
-                </div>
-                <div class="small-4 columns">
-                    <div class="mobiletab">
-                        <p><a class="latestmeekomag" ng-class="{ activetab:isActive('/magazine/') }" href="/magazine/">Style Mag</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
+    <!-- main view -->
     <section>
 
-        <div class="view-animate-container">
+        <div class="view-animate-container" ng-class="direction">
 
-            <div ng-view class="view-animate"></div>
+            <div id="meekoView" ng-view class="view-animate"></div>
 
         </div>
 
     </section>
+    <!-- main view ends -->
+    
+    
+    <section id="mobilemeekohome">
+        <div class="mobilequicktab" ng-controller="MenuController">
+          
+            <ul>
+            
+                <li class="mobiletab" ng-class="{ activetab:isActive('/') }" class="promos">
+                    <a class="promos" href="/">
+                        <div class="homemobileicon"></div>
+                        <p>Home</p>
+                    </a>
 
-    <section id="footer">
+                </li>
+
+                <li class="mobiletab" ng-class="{ activetab:isActive('/product/') }">
+
+                    <a class="latestmeekomobile" href="/product/">
+                        <div class="dressmobileicon"></div>
+                        <p>New</p>
+                    </a>
+
+                </li>
+
+
+                <li class="mobiletab" ng-class="{ activetab:isActive('/magazine/') }">
+
+                    <a class="latestmeekomag" href="/magazine/"> 
+                        <div class="dressmobileicon"></div>
+                        <p>The look</p>
+                    </a>
+
+                </li>
+
+                <li class="mobiletab" ng-class="{ activetab:isActive('/about/') }">
+
+                    <a class="latestmeekomag" href="/about/">
+                        <div class="meekomobileicon"></div>
+                        <p>About us</p>
+                    </a>
+
+                </li>
+                
+            </ul>
+                
+        </div>
+        
+    </section>    
+
+    <!--<section id="footer">
         <div class="togglecontainer">
             <div class="showfooter togglefooter"><span class="switch"><i class="fa fa-chevron-up"></i></span></div>
         </div>
@@ -154,7 +185,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
 
 </body>
 

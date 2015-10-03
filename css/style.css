@@ -46,29 +46,77 @@
     #header .logo img {
       width: auto; }
 
+.mobilehome {
+  padding-bottom: 70px;
+  padding-top: 75px; }
+
 .activetab {
-  border-bottom: 2px solid #FFF !important;
-  font-weight: bold;
-  color: #FFF !important; }
+  background: #FE0173;
+  color: #FFF !important;
+  border-bottom: 0 !important;
+  padding: 5px auto 0;
+  margin-top: 4px; }
+
+.meekomobileicon {
+  background: url("home-meeko-logo.png") no-repeat;
+  height: 18px;
+  width: 26px;
+  margin: 0 auto;
+  margin-top: 4px; }
+
+.homemobileicon {
+  background: url("home-meeko-mobile.png") no-repeat;
+  height: 18px;
+  width: 21px;
+  margin: 0 auto;
+  margin-top: 4px; }
+
+.dressmobileicon {
+  background: url("dress-home-icon.png") no-repeat;
+  height: 18px;
+  width: 18px;
+  margin: 0 auto;
+  margin-top: 4px; }
+
+#mobileHomeSearch, .search-container {
+  padding-top: 75px; }
 
 #mobilemeekohome {
-  padding: 66px 0 10px;
-  background-color: #D73F7C;
-  background-image: linear-gradient(to top right, #D73F7C, #FF8270); }
-  #mobilemeekohome .mobilequicktab .mobiletab p a {
-    font-size: 12px;
-    color: #fff;
-    font-weight: normal; }
-    #mobilemeekohome .mobilequicktab .mobiletab p a:active, #mobilemeekohome .mobilequicktab .mobiletab p a:focus {
-      color: #FFF !important;
-      border-bottom: 2px solid #fff !important;
-      font-weight: normal; }
+  position: fixed;
+  bottom: 0;
+  background-color: #262626;
+  border-top: 3px solid #D4D4D4;
+  z-index: 99999; }
+  #mobilemeekohome .mobilequicktab ul {
+    list-style: none; }
+    #mobilemeekohome .mobilequicktab ul li {
+      display: block;
+      width: 25%;
+      margin-right: 0;
+      float: left; }
+  #mobilemeekohome .mobilequicktab .mobiletab {
+    margin-top: 0;
+    padding: 5px 0 0 !important; }
+    #mobilemeekohome .mobilequicktab .mobiletab p {
+      padding: 0 !important;
+      font-size: 9px;
+      color: #fff;
+      font-weight: normal;
+      text-transform: uppercase; }
+      #mobilemeekohome .mobilequicktab .mobiletab p a {
+        font-size: 10px;
+        color: #fff;
+        font-weight: normal; }
+        #mobilemeekohome .mobilequicktab .mobiletab p a:active, #mobilemeekohome .mobilequicktab .mobiletab p a:focus {
+          border: 0 !important; }
 
-#productdetail .product-images {
-  text-align: center; }
+#productdetail {
+  padding-top: 75px; }
+  #productdetail .product-images {
+    text-align: center; }
 
 #meekoLatestProducts {
-  padding-bottom: 50px; }
+  padding: 75px 0 75px; }
 
 .categoryarchivegrid {
   margin-bottom: 5px !important; }
@@ -79,7 +127,8 @@
   border-radius: 5px; }
 
 #meekomagazine {
-  margin: 0; }
+  margin: 0;
+  padding-top: 75px; }
   #meekomagazine .magazineitem {
     box-shadow: none !important;
     width: 100%; }
@@ -143,9 +192,12 @@
         color: #FE1880; }
 
 #mobilemeekohome .mobilequicktab .mobiletab p a:focus, #mobilemeekohome .mobilequicktab .mobiletab p a:hover, #mobilemeekohome .mobilequicktab .mobiletab p a:active {
-  border-bottom: 2px solid #fff;
   font-weight: normal;
-  color: #fff !important; }
+  color: #fff !important;
+  border-bottom: 0 !important; }
+
+.sizeavailable li a:hover, .sizeavailable li a:focus, .coloravailable li a:hover, .coloravailable li a:focus, .sizeavailableQv li a:hover, .sizeavailableQv li a:focus {
+  color: #FE1880 !important; }
 
 #meekoLatestProducts .breadcrumb-wishlist, .magazinehome .breadcrumb-wishlist {
   padding: 10px 5px; }

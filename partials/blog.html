@@ -60,7 +60,7 @@
 
                                     <a href="/magazine/{{ post.categories[0].slug }}/{{ post.slug }}">
 
-                                        <img src="{{ post.custom_fields.meekopin.join(', ') ? post.custom_fields.meekopin.join(', ') : post.thumbnail_images.full.url }}" />                             
+                                        <img src="{{ post.custom_fields.meekopin ? post.custom_fields.meekopin : post.thumbnail_images.full.url }}" />                             
                                         
                                     </a>
 
