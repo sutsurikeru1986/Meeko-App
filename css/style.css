@@ -45,10 +45,23 @@
     margin: 0; }
     #header .logo img {
       width: auto; }
+  #header .search {
+    display: inherit;
+    margin-top: 15px; }
+    #header .search input {
+      border-radius: 5px; }
+    #header .search .search-form .submit {
+      right: 10px; }
+  #header .searchbg {
+    background: #000000;
+    padding-bottom: 8px; }
 
 .mobilehome {
   padding-bottom: 70px;
   padding-top: 75px; }
+
+.ng-hide {
+  display: none; }
 
 .activetab {
   background: #FE0173;

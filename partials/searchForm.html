@@ -9,21 +9,21 @@
 
                 <span class="search">
 
-                   <form class="search-form" role="search" ng-submit="search()">
+                   <div class="search-form">
 
-                        <div class="input-container">
+                        <div class="input-container" ng-controller="searchController">
 
-                            <input class="meeko-search-bar" type="search" name="s" ng-model="filter.s" placeholder="Search by brand, type or colour">
+                            <input class="meeko-search-bar" ng-model="search" id="search" type="text" placeholder="Search by brand, type or colour">
 
                             <div class="search-submit">
 
-                                <input class="submit" type="submit" id="searchsubmit" value="">
+                                <button class="submit" ng-click="fetchResults(search)"></button>
 
                             </div>
 
                         </div>
 
-                    </form>
+                    </div>
 
                 </span>
 

@@ -59,17 +59,54 @@
 
 <body>
 
-    <section id="header">
-        <div class="row fullwidthmeeko">
-            <div class="show-for-small-only searchiconmobile"></div>
-            <div class="small-12 medium-3 large-3 columns">
-                <div class="logo">
-                    <a href="http://localhost/"> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/meeko.png?c99495"> </a>
-                </div>
+<section id="header">
+    
+    <div class="row fullwidthmeeko">
+
+        <div class="show-for-small-only searchiconmobile">
+            
+            <img alt="Search for the perfect dress" title="Search for the perfect dress" src="http://preview.meeko.me/wp-content/themes/meeko/img/searchmobile.png?86c610" ng-click="collapsed = !collapsed">
+            
+        </div>
+
+        <div class="small-12 medium-3 large-3 columns">
+            
+            <div class="logo">
+                
+                <a href="http://localhost/"> 
+                    <img src="http://preview.meeko.me/wp-content/themes/meeko/img/meeko.png?c99495"> 
+                </a>
+            </div>
+            
+        </div>
+
+        <div class="small-12 medium-5 large-6 columns searchbg">
+
+            <span class="search" ng-show="collapsed">
+
+                   <div class="search-form">
+
+                        <div class="input-container" ng-controller="searchController">
+
+                            <input class="meeko-search-bar" ng-model="search" id="search" type="text" placeholder="Search by brand, type or colour">
+
+                            <div class="search-submit">
+
+                                <button class="submit" ng-click="fetchResults(search)"></button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </span>
+            
             </div>
 
         </div>
-    </section>
+    
+</section>
     
     <!-- main view -->
     <section>
@@ -130,62 +167,6 @@
         </div>
         
     </section>    
-
-    <!--<section id="footer">
-        <div class="togglecontainer">
-            <div class="showfooter togglefooter"><span class="switch"><i class="fa fa-chevron-up"></i></span></div>
-        </div>
-        <div class="hiddenfooter">
-            <div class="row">
-                <div class="small-6 medium-2 large-2 columns">
-                    <h3>Meeko</h3>
-                    <ul>
-                        <li>About us</li>
-                        <li>FAQ</li>
-                        <li>Contact us</li>
-                        <li>Delivery</li>
-                        <li>Returns</li>
-                        <li>Payment types</li>
-                    </ul>
-                </div>
-                <div class="small-6 medium-2 large-2 columns">
-                    <h3>Help</h3>
-                    <ul>
-                        <li>Sizing guides</li>
-                        <li>Style advice</li>
-                    </ul>
-                </div>
-                <div class="small-12 medium-3 large-3 columns">
-                    <h3>Connect</h3>
-                    <ul class="connect">
-                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/instagram.png?c99495"></li>
-                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/twitter.png?c99495"></li>
-                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/facebook.png?c99495"></li>
-                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/pinterest.png?c99495"></li>
-                        <li> <img src="http://preview.meeko.me/wp-content/themes/meeko/img/gplus.png?c99495"></li>
-                    </ul>
-                </div>
-                <div class="small-12 medium-5 large-5 columns">
-                    <h3>Love offers? We do!</h3>
-                    <div class="email">
-                        <form id="mc-form" novalidate="true">
-                            <input id="mc-email" type="email" class="searchbox" placeholder="Subscribe for all our latest offers" required="" name="EMAIL">
-                            <label for="mc-email"></label>
-                            <button type="submit" class="emailgo">Go</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <hr>
-        </div>
-        <div class="row">
-            <div class="small-12 medium-12 large-12 columns">
-                <div class="copyright">
-                    <p>© Meeko.me 2015</p>
-                </div>
-            </div>
-        </div>
-    </section>-->
 
 </body>
 

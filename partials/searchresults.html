@@ -1,8 +1,8 @@
-<search-form></search-form>
-
 <section id="meekoLatestProducts">
     
-    <div class="row">
+    <div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
+    
+    <div ng-hide="loader.loading" class="row">
 
         <div class="small-12 columns">
 
@@ -46,9 +46,9 @@
                                         </span>
                                         
                                     </span>
-                                    
-                                    
+                                     
                                 </p>
+                                
                             </div>  
 
                         </div>
@@ -58,14 +58,18 @@
                 </li>
 
             </ul>
+            
+            <div ng-hide="loader.loading">
 
-            <div class="pagination view-animate">
+                <div class="pagination view-animate">
 
-                <a ng-show="prev > 0" href="/search/page/{{ prev }}">Prev</a> |
-                Page {{ page }} of {{paging.pages}} | 
-                <a ng-show="next <= paging.pages" href="/search/page/{{ next }}">Next</a>
+                    <a ng-show="prev > 0" href="/search/{{ searchedDress }}/page/{{ prev }}">Prev</a> |
+                    Page {{ page }} of {{paging.pages}} | 
+                    <a ng-show="next <= paging.pages" href="/search/{{ searchedDress }}/page/{{ next }}">Next</a>
 
-            </div>    
+                </div>    
+                
+            </div>
 
         </div>
 

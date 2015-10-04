@@ -93,11 +93,31 @@ $arial: Arial, sans-serif;
                     width: auto;    
                 }
         }
+        .search {
+            display: inherit; 
+            margin-top: 15px;
+                input {
+                    border-radius: 5px;    
+                }
+            .search-form {
+                .submit {
+                    right: 10px;
+                }
+            }
+        }
+        .searchbg {
+            background: $black;
+            padding-bottom: 8px;
+        }
 }
 
 .mobilehome {
     padding-bottom: 70px;
     padding-top: 75px;
+}
+
+.ng-hide {
+    display: none;
 }
 
 .activetab {

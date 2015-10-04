@@ -45,13 +45,17 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
         controller: 'BlogPost'
     })
     .when(environmentUrl + 'search', {
+        templateUrl: partialLocation + 'productList.html',
+        controller: 'ProductList'
+    })    
+   .when(environmentUrl + 'search/:searchedDress', {
         templateUrl: partialLocation + 'searchresults.html',
         controller: 'searchResults'
-    })    
-    .when(environmentUrl + 'search/page/:page', {
+    })     
+    .when(environmentUrl + 'search/:searchedDress/page/:page', {
         templateUrl: partialLocation + 'searchresults.html',
         controller: 'searchResults'
-    })    
+    })        
     .when(environmentUrl + 'product/', {
         templateUrl: partialLocation + 'productList.html',
         controller: 'ProductList'
@@ -138,6 +142,31 @@ meekoApp.filter('nextDress', function () {
 
 /**
  *
+ *	Pass search terms
+ *
+ */
+
+
+//search controller to pass the search term into the url - this then calls another controller called searchResults
+
+.controller('searchController', function($scope, $rootScope, $http, $routeParams, $location) {  
+    // this field is bound to ng-model="search" in your HTML 
+    $scope.search = 's';
+
+    $scope.fetchResults = function (search) {
+
+        console.log(search);
+        $location.url('search/' + search);
+        
+        //clear search once submitted
+        $scope.search = '';
+    };      
+
+    // this line will be called once when controller is initialized
+})
+
+/**
+ *
  *	On runtime define the page titles for injecting into the page <title> tag
  *
  */
@@ -194,7 +223,7 @@ meekoApp.filter('nextDress', function () {
         /**
          *  Get posts from a specific category by passing in the slug
          */
-        var url = $http.get(meekoApi + '/api/get_category_posts/?post_type=magazine&custom_fields=all&slug=' + $routeParams.category);
+        var url = $http.get(meekoApi + '/api/get_category_posts/?post_type=magazine&custom_fields=all&slug=' + $routeParams.category, { cache: true });
         
         $rootScope.title = 'Magazine | Meeko';
     }
@@ -206,7 +235,7 @@ meekoApp.filter('nextDress', function () {
             /**
              *  If a page parameter has been passed, send this to the API
              */
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all&page=' + $routeParams.page);
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all&page=' + $routeParams.page, { cache: true });
         }
         else
         {
@@ -215,7 +244,7 @@ meekoApp.filter('nextDress', function () {
              */
             
             $scope.loader.loading = true ;
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all');
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all', { cache: true });
 
             // Set a default paging value
             $scope.page = 1;
@@ -279,7 +308,7 @@ meekoApp.filter('nextDress', function () {
          */
         $scope.loader.loading = true;
         
-        var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory);
+        var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory, { cache: true });
         
             var capsdresscategory = $routeParams.productcategory
             
@@ -297,7 +326,7 @@ meekoApp.filter('nextDress', function () {
         
             if($routeParams.page)
             {
-                var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory + '&page=' + $routeParams.page);
+                var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory + '&page=' + $routeParams.page, { cache: true });
 
                 // Get current page
                 $scope.page = $routeParams.page;
@@ -316,7 +345,7 @@ meekoApp.filter('nextDress', function () {
              *  If a page parameter has been passed, send this to the API
              */
             $scope.loader.loading = true;
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page=' + $routeParams.page);
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page=' + $routeParams.page, { cache: true });
         }
         else
         {
@@ -324,7 +353,7 @@ meekoApp.filter('nextDress', function () {
              *  If no parameter supplied, just get all posts
              */
             $scope.loader.loading = true ;
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all');
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all', { cache: true });
 
             // Set a default paging value
             $scope.page = 1;
@@ -383,7 +412,7 @@ meekoApp.filter('nextDress', function () {
      *  value of $routeParams.post, which is actually the post slug
      */
     
-    $http.get(meekoApi + '/api/get_post/?post_type=magazine&custom_fields=all&slug=' + $routeParams.post)
+    $http.get(meekoApi + '/api/get_post/?post_type=magazine&custom_fields=all&slug=' + $routeParams.post, { cache: true })
     
     .success(function(data, status, headers, config){
         $scope.post = data;
@@ -427,7 +456,7 @@ meekoApp.filter('nextDress', function () {
              *  If no parameter supplied, just get all posts
              */
             $scope.loader.loading = true ;
-            var url =  $http.get(meekoApi + '/api/get_post/?post_type=product&custom_fields=all&slug=' + $routeParams.post)
+            var url =  $http.get(meekoApi + '/api/get_post/?post_type=product&custom_fields=all&slug=' + $routeParams.post, { cache: true });
 
             // Set a default paging value
             $scope.page = 1;
@@ -512,15 +541,10 @@ meekoApp.filter('nextDress', function () {
         
             var sizestest = data.post.custom_fields.sizes;
 
-            //sizes = String(sizes).replace(/\"/g, ""); 
             sizes = sizes.split(" "); 
-
             console.log(typeof sizes);  
-
             console.log(sizes);  
-        
             console.log(sizestest);
-
             $rootScope.sizes = sizes;
         
         //list sizes ends
@@ -531,11 +555,8 @@ meekoApp.filter('nextDress', function () {
 
             colours = String(colours).replace(/\"/g, ""); 
             colours = colours.split(" "); 
-
             console.log(typeof colours);  
-
             console.log(colours);  
-
             $rootScope.colours = colours;  
         
         //list colours ends
@@ -611,69 +632,91 @@ meekoApp.filter('nextDress', function () {
 
 })
 
-.controller('searchResults', function($scope, $rootScope, $http, $routeParams) {
-    $scope.filter = {
-        s: ''
-    };
+.controller('searchResults', function($scope, $rootScope, $http, $routeParams) {  
+    
+    $scope.loader = { 
+        loading: true,
+    };    
     
     $rootScope.title = 'Search | Dresses | Meeko';
+    /** 
+     *  Get the parameter passed into the controller (if it exists)
+     *  and then construct the GET URL. If parameter exists, the user
+     *  is looking at a specific category.
+     */
+    if($routeParams.searchedDress)
+    {
+        /**
+         *  Get posts from a specific category by passing in the slug
+         */
+        var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&s=' + $routeParams.searchedDress);
+                
+            $scope.loader.loading = true ;
+            // Set a default paging value
+            $scope.page = 1;
+            // Set a default next value
+            $scope.next = 2;        
     
-    $scope.search = function() { 
-        if($routeParams.page)
-        {
-            /**
-             *  If a page parameter has been passed, send this to the API
-             */
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&s=' + $scope.filter.s+'&page='+$routeParams.page);
-        }
-        else
-        {
-            /**
-             *  If no parameter supplied, just get all posts with the search string
-             */
-            var url = $http.get(meekoApi + '/api/get_posts/?custom_fields=all&post_type=product&s='+$scope.filter.s);
-            
-                // Set a default paging value
-                $scope.page = 1;
-                // Set a default next value
-                $scope.next = 2;
-            
-                // Inject the title into the rootScope
-                $rootScope.title =  'Search | Dresses | Meeko';
-        }
+            // Inject the title into the rootScope
+        
+            $rootScope.searchedDress = $routeParams.searchedDress;
 
-       url.success(function(data, status, headers, config){
-           
-        console.log(data);
-        console.log($scope.filter);
-           
-        $rootScope.title =  $scope.filter.s + ' | Search | Dresses | Meeko';   
-           
+            if($routeParams.page)
+            {
+                $scope.loader.loading = true ;
+                
+                var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&s=' + $routeParams.searchedDress + '&page=' + $routeParams.page);
+                
+                $rootScope.searchedDress = $routeParams.searchedDress;
+
+                // Get current page
+                $scope.page = $routeParams.page;
+                // Caluculate next/previous values
+                $scope.next = parseInt($routeParams.page)+1;
+                $scope.prev = parseInt($routeParams.page)-1;
+            };
+
+    }
+    url
+    .success(function(data, status, headers, config){
+        
+        
+        $scope.loader.loading = false;
         /**
          *  Pass data from the feed to the view.
          *  $scope.posts will pass exclusively post data
          *  $scope.paging will pass the whole feed and will be used to work out paging
          */
         $scope.posts = data.posts;
-        $scope.paging = data;
+        $scope.paging = data; 
+        // Set a default paging value
+        $scope.page = 1;
+        // Set a default next value
+        $scope.next = 2;        
         //console.log(data);
+
+        // Inject the title into the rootScope
+        // $rootScope.title = data.category.title;
 
         if($routeParams.page)
         {
+            
+            $rootScope.categorytitledresses = $routeParams.productcategory;
+            
             // Get current page
             $scope.page = $routeParams.page;
             // Caluculate next/previous values
             $scope.next = parseInt($routeParams.page)+1;
             $scope.prev = parseInt($routeParams.page)-1;
-        };
+        };   
         
     })
     .error(function(data, status, headers, config){
-        window.alert("no posts");
+        //window.alert("no posts");
     })
-
-}
+    
 })
+
 
 
 
@@ -719,6 +762,6 @@ meekoApp.filter('nextDress', function () {
 .directive('searchForm', function() {
 	return {
 		restrict: 'EA',
-		templateUrl: '/partials/searchForm.html'
+		templateUrl: partialLocation + 'searchForm.html'
 	};
 })
