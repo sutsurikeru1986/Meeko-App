@@ -14,7 +14,7 @@
                     
                     <div class="small-12 medium-10 large-10 columns" itemprop="breadcrumb">
                         <p>
-                            <a class="home" href="http://localhost">Home</a> / <a href="/product/{{ post.post.taxonomy_product_cat[0].slug }}">{{ post.post.taxonomy_product_cat[0].title }}</a> /  <span ng-bind-html="post.post.title"></span></p>
+                            <a class="home" href="http://localhost">Home</a> / <a class="home" href="http://localhost/styles">Style</a> / <a href="/product/{{ post.post.taxonomy_product_cat[0].slug }}">{{ post.post.taxonomy_product_cat[0].title }}</a> /  <span ng-bind-html="post.post.title"></span></p>
                     </div>
                     
                 </div>
@@ -233,7 +233,7 @@
 
     </div>
     
-    <div id="noMoreDressesFound" class="meekoredirect reveal-modal small" style="margin-top: 150px; z-index: 50000;" data-reveal aria-labelledby="noMoreDressesFound" aria-hidden="true" role="dialog">
+    <div id="noMoreDressesFound" class="meekoredirect reveal-modal small" style="margin-top: 150px; z-index: 99999999999 !important;" data-reveal aria-labelledby="noMoreDressesFound" aria-hidden="true" role="dialog">
         <h2 id="modalTitle">Oh no!</h2>
 
         <p>We have no more new Dresses to display! More are added daily so keep checking back.</p>

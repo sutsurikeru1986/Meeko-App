@@ -17,8 +17,7 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
  */
 
 
-
-.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider)
+.config(['$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider, $rootScope, $scope)
 {
 	/**
 	 *	Configure routes
@@ -28,65 +27,85 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
         templateUrl: partialLocation + 'index.html'
         //controller: 'GetPage'
     })
+    .when(environmentUrl + 'styles/', {
+        templateUrl: partialLocation + 'dressTypes.html',
+        controller: 'dressTypes',
+        animate: 'slideLeft'
+    })    
     .when(environmentUrl + 'magazine/', {
         templateUrl: partialLocation + 'blog.html',
-        controller: 'BlogList'
+        controller: 'BlogList',
+        animate: 'slideLeft'
     })
     .when(environmentUrl + 'magazine/page/:page', {
         templateUrl: partialLocation + 'blog.html',
-        controller: 'BlogList'
+        controller: 'BlogList',
+        animate: 'slideRight'
     })
     .when(environmentUrl + 'magazine/:category', {
         templateUrl: partialLocation + 'blog.html',
-        controller: 'BlogList'
+        controller: 'BlogList',
+        animate: 'slideLeft'
     })
     .when(environmentUrl + 'magazine/:category/:post', {
         templateUrl: partialLocation + 'post.html',
-        controller: 'BlogPost'
+        controller: 'BlogPost',
+        animate: 'slideright'
     })
     .when(environmentUrl + 'search', {
         templateUrl: partialLocation + 'productList.html',
-        controller: 'ProductList'
+        controller: 'ProductList',
+        animate: 'slideRight'
     })    
    .when(environmentUrl + 'search/:searchedDress', {
         templateUrl: partialLocation + 'searchresults.html',
-        controller: 'searchResults'
+        controller: 'searchResults',
+        animate: 'slideRight'
     })     
     .when(environmentUrl + 'search/:searchedDress/page/:page', {
         templateUrl: partialLocation + 'searchresults.html',
-        controller: 'searchResults'
+        controller: 'searchResults',
+        animate: 'slideRight'
     })        
     .when(environmentUrl + 'product/', {
         templateUrl: partialLocation + 'productList.html',
-        controller: 'ProductList'
+        controller: 'ProductList',
+        animate: 'slideLeft'
     })
     .when(environmentUrl + 'product/page/:page', {
         templateUrl: partialLocation + 'productList.html',
-        controller: 'ProductList'
+        controller: 'ProductList',
+        animate: 'slideLeft'
     })    
     .when(environmentUrl + 'product/:productcategory', {
         templateUrl: partialLocation + 'productListCat.html',
-        controller: 'ProductList'
+        controller: 'ProductList',
+        animate: 'slideLeft'
     })
     .when(environmentUrl + 'product/:productcategory/page/:page', {
         templateUrl: partialLocation + 'productListCat.html',
-        controller: 'ProductList'
+        controller: 'ProductList',
+        animate: 'slideLeft'
     })    
     .when(environmentUrl + 'product/:productcategory/:post', {
         templateUrl: partialLocation + 'ProductDetails.html',
-        controller: 'ProductDetails'
+        controller: 'ProductDetails',
+        animate: 'slideLeft'
     })
     .when(environmentUrl + 'product/prev/:postnocat', {
         templateUrl: partialLocation + 'ProductDetails.html',
-        controller: 'ProductDetails'
+        controller: 'ProductDetails',
+        animate: 'slideLeft'
     })   
     .when(environmentUrl + 'product/next/:postnocat', {
         templateUrl: partialLocation + 'ProductDetails.html',
-        controller: 'ProductDetails'
+        controller: 'ProductDetails',
+        animate: 'slideLeft'
     })    
     .when(environmentUrl + 'about/', {
-        templateUrl: partialLocation + 'ProductList.html',
-        controller: 'ProductList'
+        templateUrl: partialLocation + 'index.html',
+        animate: 'slideLeft'
+        
     })         
     .otherwise({
         redirectTo: environmentUrl
@@ -95,14 +114,14 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
      /**
      *	Sampling caching everything to see how the performance is impacted
      */   
-     $httpProvider.defaults.cache = false;
+     $httpProvider.defaults.cache = true;
     
     /**
      *	Remove # from the URL with $locationProvider
      */
      $locationProvider.html5Mode(true).hashPrefix('!');
+    
 }])
-
 
 
 /**
@@ -140,6 +159,41 @@ meekoApp.filter('nextDress', function () {
 })
 
 
+.controller('goBack', function ($scope, $rootScope, $location) {
+
+    var history = [];
+
+    $rootScope.$on('$routeChangeSuccess', function () {
+        
+        history.push($location.$$path);
+        
+        $rootScope.currentPath = $location.path();
+
+        //console.log($rootScope.currentPath);
+
+        //check to see current path, if the page equals '/' don't show a back button
+        var hideBack = '/';
+        var hidebtn = angular.element('.gobackmobile');
+
+        if ($rootScope.currentPath === hideBack) {
+            
+            hidebtn.addClass('testerino');
+
+        // when the path changes, show the back button
+        } else if ($rootScope.currentPath != hideBack) {
+            
+            hidebtn.removeClass('testerino');
+
+        }        
+    });
+
+    $rootScope.back = function () {
+        var prevUrl = history.length > 1 ? history.splice(-2)[0] : "/";
+        $location.path(prevUrl);
+    };
+
+})
+
 /**
  *
  *	Pass search terms
@@ -151,9 +205,9 @@ meekoApp.filter('nextDress', function () {
 
 .controller('searchController', function($scope, $rootScope, $http, $routeParams, $location) {  
     // this field is bound to ng-model="search" in your HTML 
-    $scope.search = 's';
+    $scope.search = '';
 
-    $scope.fetchResults = function (search) {
+    $scope.fetchResults = function(search) {
 
         console.log(search);
         $location.url('search/' + search);
@@ -171,10 +225,12 @@ meekoApp.filter('nextDress', function () {
  *
  */
 
-.controller('MenuController', function($scope, $location){
+.controller('MenuController', function($scope, $location, $rootScope){
     $scope.isActive = function(route) {
        return route === $location.url();
     }
+    
+    $rootScope.urlLocation = 'http://localhost/';
 })
 
 
@@ -210,7 +266,7 @@ meekoApp.filter('nextDress', function () {
 .controller('BlogList', function($scope, $rootScope, $http, $routeParams){
     
     $scope.loader = { 
-        loading: false,
+        loading: true,
     };
 
     /** 
@@ -243,7 +299,6 @@ meekoApp.filter('nextDress', function () {
              *  If no parameter supplied, just get all posts
              */
             
-            $scope.loader.loading = true ;
             var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all', { cache: true });
 
             // Set a default paging value
@@ -287,13 +342,45 @@ meekoApp.filter('nextDress', function () {
 
 })
 
+/**
+ *  Get Dress Types
+ */
+
+
+.controller('dressTypes', function($scope, $rootScope, $http, $routeParams) {
+  
+     $scope.loader = { 
+
+      loading : true ,
+
+     };    
+
+    /**
+     *  Get posts from a specific category by passing in the slug
+     */
+
+$http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', { cache: true })
+    .success(function(data, status, headers, config){
+
+        $scope.terms = data.terms;
+        $scope.loader.loading = false ; 
+        //console.log(data);
+        $rootScope.title = ' Dress Types | Meeko.me';
+
+    })
+    .error(function(data, status, headers, config){
+        //window.alert("no posts");
+    })
+    
+})
+
 
 
 .controller('ProductList', function($scope, $rootScope, $http, $routeParams){
 
      $scope.loader = { 
 
-      loading : false ,
+      loading : true ,
 
      };
     /** 
@@ -539,25 +626,41 @@ meekoApp.filter('nextDress', function () {
         //list sizes using custom field 'sizes' - data has to be entered like this: 8 10 12 14 16 18 
             var sizes = data.post.custom_fields.sizes;
         
+            if(sizes == undefined) {
+
+                console.log('sizes undifiend - needs data setting in woocommerce');  
+
+            } else {
+
             var sizestest = data.post.custom_fields.sizes;
 
             sizes = sizes.split(" "); 
+
             console.log(typeof sizes);  
             console.log(sizes);  
             console.log(sizestest);
             $rootScope.sizes = sizes;
+
+        }
         
         //list sizes ends
         
         //list colours using custom field 'colours' = data has to entered like this: Navy Cream
         
             var colours = data.post.custom_fields.colours;
+        
+            if(colours == undefined) {
+                
+                console.log('colour undifiend - needs data setting in woocommerce'); 
+                
+            } else {        
 
-            colours = String(colours).replace(/\"/g, ""); 
-            colours = colours.split(" "); 
-            console.log(typeof colours);  
-            console.log(colours);  
-            $rootScope.colours = colours;  
+                colours = colours.split(" "); 
+                console.log(typeof colours);  
+                console.log(colours);  
+                $rootScope.colours = colours;  
+            
+            }
         
         //list colours ends
         
@@ -599,6 +702,10 @@ meekoApp.filter('nextDress', function () {
 
 .controller('CategoryList', function($scope, $http){
 
+    
+    $scope.loader = { 
+        loading: true,
+    };
     /**
      *  This method just gets the categories available to us and 
      *  makes them available through CategoryList controller
@@ -606,6 +713,7 @@ meekoApp.filter('nextDress', function () {
     $http.get(meekoApi + '/api/get_category_index/')
     .success(function(data, status, headers, config){
         $scope.categories = data.categories;
+        $scope.loader.loading = false;
     })
     .error(function(data, status, headers, config){
         //window.alert("Unable to get categories from Meeko");
@@ -697,6 +805,10 @@ meekoApp.filter('nextDress', function () {
 
         // Inject the title into the rootScope
         // $rootScope.title = data.category.title;
+        
+        //toggle open search input
+        
+        //var removeSearch = angular.element('#searchDresses').addClass('ng-hide');
 
         if($routeParams.page)
         {
@@ -764,4 +876,19 @@ meekoApp.filter('nextDress', function () {
 		restrict: 'EA',
 		templateUrl: partialLocation + 'searchForm.html'
 	};
+})
+
+
+
+.directive('animClass',function($route){
+  return {
+    link: function(scope, elm, attrs){
+      var enterClass = $route.current.animate;
+      elm.addClass(enterClass);
+      scope.$on('$destroy',function(){
+        elm.removeClass(enterClass);
+        elm.addClass($route.current.animate);
+      })
+    }
+  }
 })
