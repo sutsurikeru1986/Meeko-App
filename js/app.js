@@ -94,13 +94,11 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
     })
     .when(environmentUrl + 'product/prev/:postnocat', {
         templateUrl: partialLocation + 'ProductDetails.html',
-        controller: 'ProductDetails',
-        animate: 'slideLeft'
+        controller: 'ProductDetails'
     })   
     .when(environmentUrl + 'product/next/:postnocat', {
         templateUrl: partialLocation + 'ProductDetails.html',
-        controller: 'ProductDetails',
-        animate: 'slideLeft'
+        controller: 'ProductDetails'
     })    
     .when(environmentUrl + 'about/', {
         templateUrl: partialLocation + 'index.html',
@@ -120,6 +118,14 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
      *	Remove # from the URL with $locationProvider
      */
      $locationProvider.html5Mode(true).hashPrefix('!');
+    
+    
+    var focusSearch = angular.element('.searchiconmobile');
+    
+    focusSearch.click(function() {
+        $('#search').focus();
+        console.log('focused input');
+    });
     
 }])
 
@@ -361,8 +367,10 @@ meekoApp.filter('nextDress', function () {
 
 $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', { cache: true })
     .success(function(data, status, headers, config){
-
+    
         $scope.terms = data.terms;
+    
+        //$scope.terms = data.terms;
         $scope.loader.loading = false ; 
         //console.log(data);
         $rootScope.title = ' Dress Types | Meeko.me';
@@ -383,11 +391,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
       loading : true ,
 
      };
-    /** 
-     *  Get the parameter passed into the controller (if it exists)
-     *  and then construct the GET URL. If parameter exists, the user
-     *  is looking at a specific category.
-     */
+
     if($routeParams.productcategory)
     {
         /**
@@ -454,20 +458,11 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
     url
     .success(function(data, status, headers, config){
         console.log(data);
-        
-        /**
-         *  Pass data from the feed to the view.
-         *  $scope.posts will pass exclusively post data
-         *  $scope.paging will pass the whole feed and will be used to work out paging
-         */
+
         $scope.posts = data.posts;
         $scope.paging = data;
-        $scope.loader.loading = false ; 
-        //console.log(data);
-
-        // Inject the title into the rootScope
-        // $rootScope.title = data.category.title;
-
+        $scope.loader.loading = false;
+            
         if($routeParams.page)
         {
             
@@ -573,9 +568,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
         
         $scope.swipeProductLeft = function () {
             console.log('swipe left triggered');
-            
-            angular.element('#meekoView').addClass('leftswipeclass');
-                          
+                                  
             $rootScope.leftDress = data.next_url;
             console.log($rootScope.leftDres);
             
@@ -790,23 +783,16 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
         
         
         $scope.loader.loading = false;
-        /**
-         *  Pass data from the feed to the view.
-         *  $scope.posts will pass exclusively post data
-         *  $scope.paging will pass the whole feed and will be used to work out paging
-         */
         $scope.posts = data.posts;
         $scope.paging = data; 
+        
         // Set a default paging value
+        
         $scope.page = 1;
         // Set a default next value
         $scope.next = 2;        
-        //console.log(data);
 
-        // Inject the title into the rootScope
-        // $rootScope.title = data.category.title;
-        
-        //toggle open search input
+        //toggle open search input - need to revisit this
         
         //var removeSearch = angular.element('#searchDresses').addClass('ng-hide');
 
@@ -830,7 +816,9 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
 })
 
 
-
+/**
+ *  Owl Carousel Main Directive
+ */
 
 //owl carousel directive to work with ng-repeat - the issue was without this the page would load before the ng-repeat and wouldnt build owl-carousel
 .directive("owlCarousel", function() {
@@ -855,6 +843,9 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
 })
 
 
+/**
+ *  Owl Carousel item Directive
+ */
 
 .directive('owlCarouselItem', [function() {
 	return {
@@ -870,25 +861,43 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
 }])
 
 
+/**
+ *  Search form partial
+ */
 
 .directive('searchForm', function() {
+    
 	return {
+        
 		restrict: 'EA',
 		templateUrl: partialLocation + 'searchForm.html'
+        
 	};
+    
 })
 
 
+/**
+ *  Slideleft/Slideright transitions for route changes
+ */
 
-.directive('animClass',function($route){
-  return {
-    link: function(scope, elm, attrs){
-      var enterClass = $route.current.animate;
-      elm.addClass(enterClass);
-      scope.$on('$destroy',function(){
-        elm.removeClass(enterClass);
-        elm.addClass($route.current.animate);
-      })
+.directive('animClass', function ($route) {
+    
+    return {
+        
+        link: function (scope, elm, attrs) {
+            
+            var enterClass = $route.current.animate;
+            elm.addClass(enterClass);
+            
+            scope.$on('$destroy', function () {
+                
+                elm.removeClass(enterClass);
+                elm.addClass($route.current.animate);
+                
+            })
+            
+        }
+        
     }
-  }
 })

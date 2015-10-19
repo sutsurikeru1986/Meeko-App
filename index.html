@@ -11,6 +11,7 @@
     <!-- include jQuery -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="application/javascript" src="http://localhost/js/fastclick.js"></script>
 
     <!-- include AngularJS plus modules -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
@@ -50,6 +51,15 @@
         $(window).bind("load", function () {
             $(document).foundation();
         });    
+        
+        $(function() {
+            FastClick.attach(document.body);
+        });        
+		
+        $( document ).ready(function() { 
+
+        });		
+        
     </script>
 
 
@@ -132,7 +142,8 @@
         <ul>
 
             <li class="mobiletab" ng-class="{ activetab:isActive('/') }" class="promos">
-                <a class="promos" href="/">
+                
+                <a class="promos" href="/" ng-class="{ activetab:isActive('/') }">
                     <div class="homemobileicon"></div>
                     <p>Home</p>
                 </a>
@@ -141,7 +152,7 @@
             
             <li class="mobiletab" ng-class="{ activetab:isActive('/styles/') }">
 
-                <a class="latestmeekomobile" href="/styles/">
+                <a class="latestmeekomobile" href="/styles/" ng-class="{ activetab:isActive('/styles/') }">
                     <div class="dressmobileicon"></div>
                     <p>Styles</p>
                 </a>
@@ -150,7 +161,7 @@
 
             <li class="mobiletab" ng-class="{ activetab:isActive('/product/') }">
 
-                <a class="latestmeekomobile" href="/product/">
+                <a class="latestmeekomobile" href="/product/" ng-class="{ activetab:isActive('/product/') }">
                     <div class="dressmobileicon"></div>
                     <p>New</p>
                 </a>
@@ -160,7 +171,7 @@
 
             <li class="mobiletab" ng-class="{ activetab:isActive('/magazine/') }">
 
-                <a class="latestmeekomag" href="/magazine/"> 
+                <a class="latestmeekomag" href="/magazine/" ng-class="{ activetab:isActive('/magazine/') }"> 
                     <div class="dressmobileicon"></div>
                     <p>The look</p>
                 </a>
@@ -169,7 +180,7 @@
 
             <li class="mobiletab" ng-class="{ activetab:isActive('/about/') }">
 
-                <a class="latestmeekomag" href="/about/">
+                <a class="latestmeekomag" href="/about/" ng-class="{ activetab:isActive('/about/') }">
                     <div class="meekomobileicon"></div>
                     <p>About us</p>
                 </a>
@@ -180,7 +191,7 @@
 
     </div>
 
-</section>    
+</section>      
 
 </body>
 

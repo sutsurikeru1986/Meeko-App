@@ -85,7 +85,6 @@ i.fa.fa-angle-left.fa-3 {
 }
 
 .animate{
-	//position:relative;
 	-webkit-animation: drop-in 0.5s cubic-bezier(.05,1.25,.61,1);
 	-webkit-animation-delay: 1s;
 	-webkit-animation-fill-mode: backwards;
@@ -94,15 +93,26 @@ i.fa.fa-angle-left.fa-3 {
 	animation-fill-mode: backwards;    
 }
 
-.view {
+#meekoRequest {
+}
+
+.view-animate-container {
     width: 100%;
-    height: 100%;  
+    height: calc(100% + 1px);
+    position: relative;
+}
+
+.view {
     position: fixed;
-    overflow-y: scroll; 
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;  
     top: 0;
     left: 0;
-    z-index: 10;
 }
+
 
 .slideLeft {
   &.ng-enter, &.ng-leave {
@@ -146,6 +156,10 @@ i.fa.fa-angle-left.fa-3 {
     margin: 0!important;
 }
 
+#meekoRequest {
+    min-height: inherit!important;
+    transform: translate3d(0,0,0);
+}
 
 #header {
     padding: 8px 0;
@@ -153,6 +167,7 @@ i.fa.fa-angle-left.fa-3 {
     height: 43px;
         .logo {
             margin: 0;
+            display: inherit !important;
                 img {
                     width: 25%;    
                 }
@@ -216,8 +231,21 @@ i.fa.fa-angle-left.fa-3 {
     margin-top: 4px
 }
 
+a {
+    &.promos, 
+    &.latestmeekomobile,
+    &.latestmeekomag,{
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        margin: 0;
+        z-index: 9999;
+    }
+}
+
 #mobileHomeSearch, .search-container {
     padding-top: 45px;
+    transform: translate3d(0,0,0);
 }
  
 #mobilemeekohome {
@@ -225,12 +253,15 @@ i.fa.fa-angle-left.fa-3 {
     bottom: 0;
     background-color: $instyleblack;
     border-top: 3px solid $divider;
-    z-index: 99999;
+    z-index: 999;
         .mobilequicktab {
             ul {
+                display: block;
+                width: 100%;
                 list-style: none;   
+                position: relative;
                     li {
-                        display: block;
+                        //display: block;
                         width: 20%;
                         margin-right: 0;
                         float: left;
@@ -264,6 +295,7 @@ i.fa.fa-angle-left.fa-3 {
 
 #productdetail {
     padding-top: 45px;
+    transform: translate3d(0,0,0);
         .product-images {
             text-align: center;
                 .gallery {
@@ -275,19 +307,17 @@ i.fa.fa-angle-left.fa-3 {
     
 }
 
-.view-animate-container {
-    position: relative;
-}
-
 #meekoRequest {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: calc(100% + 1px);
 }
 
 #meekoLatestProducts {
     padding: 45px 0 75px;
     position: relative;
+    height: calc(100% + 1px);
+    transform: translate3d(0,0,0);
 }
 
 .categoryarchivegrid {
@@ -303,8 +333,9 @@ i.fa.fa-angle-left.fa-3 {
 }
 
 #meekomagazine {
-    margin: 0;
-    padding: 45px 0 75px;
+    padding: 30px 0 75px;
+    height: calc(100% + 1px);
+    transform: translate3d(0,0,0);
     .magazineitem {
         box-shadow: none !important;
         width: 100%;
@@ -341,7 +372,7 @@ i.fa.fa-angle-left.fa-3 {
 }
 
 .relateddresses {
-    padding-bottom: 0;
+    padding-bottom: 45px;
     .owl-carousel {
         .owl-item {
             height: auto; 
@@ -357,6 +388,7 @@ i.fa.fa-angle-left.fa-3 {
     column-count: 2;
     column-gap: 10px;
     width: 100%;
+    padding-bottom: 25px;
         li {
             display: inline-block;
             width: 100%;
@@ -398,6 +430,7 @@ i.fa.fa-angle-left.fa-3 {
 }
 
 .dresstypes {
+    padding-bottom: 100px;
     li {
         .dresstypecontainer {
             padding: 10px;
@@ -464,6 +497,10 @@ i.fa.fa-angle-left.fa-3 {
     background: #FCFCFC;
 }
 
+.pagination {
+    padding-bottom: 60px;    
+}
+
 .ajax-loader-meeko-app {
     //display: none;
     position: fixed;
@@ -481,7 +518,8 @@ i.fa.fa-angle-left.fa-3 {
     color: #ffffff;
     cursor: pointer;
     position: absolute;
-    left: 6px;
+    left: 15px;
     top: 5px;
     z-index: 6000;
+    width: 40px;
 }

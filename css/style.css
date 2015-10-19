@@ -40,14 +40,20 @@ i.fa.fa-angle-left.fa-3 {
   animation-delay: 1s;
   animation-fill-mode: backwards; }
 
-.view {
+.view-animate-container {
   width: 100%;
-  height: 100%;
+  height: calc(100% + 1px);
+  position: relative; }
+
+.view {
   position: fixed;
+  height: 100%;
+  overflow-x: hidden;
   overflow-y: scroll;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
   top: 0;
-  left: 0;
-  z-index: 10; }
+  left: 0; }
 
 .slideLeft.ng-enter, .slideLeft.ng-leave {
   -webkit-transition: all 1s;
@@ -74,12 +80,17 @@ i.fa.fa-angle-left.fa-3 {
 [class*="block-grid-"] {
   margin: 0 !important; }
 
+#meekoRequest {
+  min-height: inherit !important;
+  transform: translate3d(0, 0, 0); }
+
 #header {
   padding: 8px 0;
   position: fixed;
   height: 43px; }
   #header .logo {
-    margin: 0; }
+    margin: 0;
+    display: inherit !important; }
     #header .logo img {
       width: 25%; }
   #header .search {
@@ -128,19 +139,29 @@ i.fa.fa-angle-left.fa-3 {
   margin: 0 auto;
   margin-top: 4px; }
 
+a.promos, a.latestmeekomobile, a.latestmeekomag {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  margin: 0;
+  z-index: 9999; }
+
 #mobileHomeSearch, .search-container {
-  padding-top: 45px; }
+  padding-top: 45px;
+  transform: translate3d(0, 0, 0); }
 
 #mobilemeekohome {
   position: fixed;
   bottom: 0;
   background-color: #262626;
   border-top: 3px solid #D4D4D4;
-  z-index: 99999; }
+  z-index: 999; }
   #mobilemeekohome .mobilequicktab ul {
-    list-style: none; }
+    display: block;
+    width: 100%;
+    list-style: none;
+    position: relative; }
     #mobilemeekohome .mobilequicktab ul li {
-      display: block;
       width: 20%;
       margin-right: 0;
       float: left; }
@@ -161,21 +182,21 @@ i.fa.fa-angle-left.fa-3 {
           border: 0 !important; }
 
 #productdetail {
-  padding-top: 45px; }
+  padding-top: 45px;
+  transform: translate3d(0, 0, 0); }
   #productdetail .product-images {
     text-align: center; }
-
-.view-animate-container {
-  position: relative; }
 
 #meekoRequest {
   position: relative;
   width: 100%;
-  height: 100%; }
+  height: calc(100% + 1px); }
 
 #meekoLatestProducts {
   padding: 45px 0 75px;
-  position: relative; }
+  position: relative;
+  height: calc(100% + 1px);
+  transform: translate3d(0, 0, 0); }
 
 .categoryarchivegrid {
   margin-bottom: 5px !important; }
@@ -186,8 +207,9 @@ i.fa.fa-angle-left.fa-3 {
   border-radius: 5px; }
 
 #meekomagazine {
-  margin: 0;
-  padding: 45px 0 75px; }
+  padding: 30px 0 75px;
+  height: calc(100% + 1px);
+  transform: translate3d(0, 0, 0); }
   #meekomagazine .magazineitem {
     box-shadow: none !important;
     width: 100%; }
@@ -211,7 +233,7 @@ i.fa.fa-angle-left.fa-3 {
     margin: 0; }
 
 .relateddresses {
-  padding-bottom: 0; }
+  padding-bottom: 45px; }
   .relateddresses .owl-carousel .owl-item {
     height: auto; }
 
@@ -222,7 +244,8 @@ i.fa.fa-angle-left.fa-3 {
   -webkit-column-gap: 10px;
   column-count: 2;
   column-gap: 10px;
-  width: 100%; }
+  width: 100%;
+  padding-bottom: 25px; }
   .masonrycontainer li {
     display: inline-block;
     width: 100%;
@@ -252,18 +275,20 @@ i.fa.fa-angle-left.fa-3 {
           background: #fff;
           color: #FE1880; }
 
-.dresstypes li .dresstypecontainer {
-  padding: 10px;
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-  background: #ffffff;
-  margin-bottom: 10px; }
-  .dresstypes li .dresstypecontainer .dresstyletitle {
-    text-align: center;
-    padding: 5px 0 0; }
-    .dresstypes li .dresstypecontainer .dresstyletitle a {
-      font-size: 14px;
-      font-family: "Open Sans", arial;
-      color: #646473; }
+.dresstypes {
+  padding-bottom: 100px; }
+  .dresstypes li .dresstypecontainer {
+    padding: 10px;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    margin-bottom: 10px; }
+    .dresstypes li .dresstypecontainer .dresstyletitle {
+      text-align: center;
+      padding: 5px 0 0; }
+      .dresstypes li .dresstypecontainer .dresstyletitle a {
+        font-size: 14px;
+        font-family: "Open Sans", arial;
+        color: #646473; }
 
 #mobilemeekohome .mobilequicktab .mobiletab p a:focus, #mobilemeekohome .mobilequicktab .mobiletab p a:hover, #mobilemeekohome .mobilequicktab .mobiletab p a:active {
   font-weight: normal;
@@ -290,6 +315,9 @@ i.fa.fa-angle-left.fa-3 {
 .latestbg {
   background: #FCFCFC; }
 
+.pagination {
+  padding-bottom: 60px; }
+
 .ajax-loader-meeko-app {
   position: fixed;
   top: 0;
@@ -303,8 +331,9 @@ i.fa.fa-angle-left.fa-3 {
   color: #ffffff;
   cursor: pointer;
   position: absolute;
-  left: 6px;
+  left: 15px;
   top: 5px;
-  z-index: 6000; }
+  z-index: 6000;
+  width: 40px; }
 
 /*# sourceMappingURL=style.css.map */
