@@ -191,6 +191,8 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
   position: relative;
   width: 100%;
   height: calc(100% + 1px); }
+  #meekoRequest .meekoPromotions {
+    padding-bottom: 60px; }
 
 #meekoLatestProducts {
   padding: 45px 0 75px;
@@ -228,6 +230,7 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
   padding: 20px 0 10px; }
 
 .recommendgrid {
+  position: relative;
   height: auto !important; }
   .recommendgrid .dressprice p {
     margin: 0; }
@@ -245,7 +248,7 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
   column-count: 2;
   column-gap: 10px;
   width: 100%;
-  padding-bottom: 25px; }
+  padding-bottom: 5px; }
   .masonrycontainer li {
     display: inline-block;
     width: 100%;
@@ -316,7 +319,27 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
   background: #FCFCFC; }
 
 .pagination {
-  padding-bottom: 60px; }
+  padding-bottom: 80px; }
+
+.meekoPagination {
+  text-align: center; }
+  .meekoPagination a {
+    color: #ffffff;
+    background: #FE1880;
+    padding: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin: 0 10px;
+    font-family: "Open Sans", arial;
+    text-transform: uppercase; }
+    .meekoPagination a:hover, .meekoPagination a:focus, .meekoPagination a:active {
+      transition: all 0.5s ease-out;
+      background: #ffffff;
+      color: #FE1880; }
+  .meekoPagination span {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: "Open Sans", arial; }
 
 .ajax-loader-meeko-app {
   position: fixed;
@@ -333,7 +356,9 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
   position: absolute;
   left: 15px;
   top: 5px;
-  z-index: 6000;
-  width: 40px; }
+  z-index: 6000; }
+  .gobackmobile a {
+    width: 40px;
+    display: block; }
 
 /*# sourceMappingURL=style.css.map */

@@ -311,6 +311,9 @@ a {
     position: relative;
     width: 100%;
     height: calc(100% + 1px);
+        .meekoPromotions {
+            padding-bottom: 60px;    
+        }
 }
 
 #meekoLatestProducts {
@@ -363,6 +366,7 @@ a {
 }
 
 .recommendgrid {
+    position: relative;
     height: auto!important;
     .dressprice {
         p {
@@ -388,7 +392,7 @@ a {
     column-count: 2;
     column-gap: 10px;
     width: 100%;
-    padding-bottom: 25px;
+    padding-bottom: 5px;
         li {
             display: inline-block;
             width: 100%;
@@ -498,7 +502,33 @@ a {
 }
 
 .pagination {
-    padding-bottom: 60px;    
+    padding-bottom: 80px;    
+}
+
+.meekoPagination {
+    text-align: center;
+        a {
+            color: $white;
+            background: $instylepink;
+            padding: 3px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin: 0 10px;
+            font-family: $opensans;
+            text-transform: uppercase;
+                &:hover,
+                &:focus,
+                &:active {
+                    transition: all 0.5s ease-out;
+                    background: $white;
+                    color: $instylepink;
+                }
+        }
+        span {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-family: $opensans;
+        }
 }
 
 .ajax-loader-meeko-app {
@@ -521,5 +551,8 @@ a {
     left: 15px;
     top: 5px;
     z-index: 6000;
-    width: 40px;
+        a {
+            width: 40px;
+            display: block;
+        }
 }

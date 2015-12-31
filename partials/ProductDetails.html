@@ -57,7 +57,7 @@
 
                         <div class="small-6 medium-6 large-5 columns">
                             <div class="brand">
-                                <img class="owl-lazy" src="http://preview.meeko.me/wp-content/themes/meeko/img/quizclothing-logo.jpg?c99495">
+                                <img class="owl-lazy" src="http://preview.meeko.me/wp-content/themes/meeko/img/{{ post.post.custom_fields.brand }}.jpg">
                             </div>
                         </div>
 
@@ -69,16 +69,17 @@
 
                             <div class="price">
                                 <p>
-                                    <span class="amount">
-                                        {{ post.post.custom_fields._regular_price | myCurrency }}
-                                    </span>
+                                    <del ng-show="post.post.custom_fields._regular_price > 0">
+                                        <span class="amount">
+                                            {{ post.post.custom_fields._regular_price | myCurrency }}
+                                        </span>
+                                    </del>
 
-
-                                <span ng-if="post.post.custom_fields._sale_price == ''"></span>
-
-                                    <span ng-if="post.post.custom_fields._sale_price != ''" class="amount">
-                                        {{ post.post.custom_fields._sale_price | myCurrency }}
-                                    </span>
+                                    <ins ng-show="post.post.custom_fields._sale_price > 0">
+                                        <span class="amount">
+                                             {{ post.post.custom_fields._sale_price | myCurrency }}
+                                        </span>
+                                    </ins>
                                 </p>
                             </div>
 
@@ -136,14 +137,19 @@
                             <div class="buynowaffiliate">
                                 <a class="addtobag" rel="nofollow" data-reveal-id="buyNow" href="javascript:void(0)" ng-click="buyDress()">Buy Now</a>
                             </div>
+                        
+                            <!-- buy now redirect -->                        
 
                             <div id="buyNow" class="meekoredirect reveal-modal small" style="margin-top: 150px; z-index: 50000;" data-reveal="">
 
                                 <h3>We are redirecting you to...</h3>
-                                <p><img src="http://preview.meeko.me/wp-content/themes/meeko/img/quizclothing-logo.jpg?c99495"></p>
+                                <p><img src="http://preview.meeko.me/wp-content/themes/meeko/img/{{ post.post.custom_fields.brand }}.jpg"></p>
                                 <p><strong ng-bind-html="post.post.title"></strong></p> <a class="close-reveal-modal">×</a>
 
                             </div>
+                        
+                            <!-- buy now redirect ends -->
+                        
                         </div>
 
                     </div>
@@ -207,14 +213,23 @@
 
                             <div class="dressprice">
                                 <p>
-                                    <span class="amount">
-                                        {{ post.custom_fields._regular_price | myCurrency }}
-                                    </span>
+                                   <del ng-show="post.custom_fields._regular_price > 0">
+                                        <span class="amount">
+                                            {{ post.custom_fields._regular_price | myCurrency }}
+                                        </span>
+                                    </del>
 
-                                <span ng-if="post.custom_fields._sale_price == ''"></span>
-
-                                    <span ng-if="post.custom_fields._sale_price != ''" class="amount">
-                                        {{ post.custom_fields._sale_price | myCurrency }}
+                                    <ins ng-show="post.custom_fields._sale_price > 0">
+                                        <span class="amount">
+                                            {{ post.custom_fields._sale_price | myCurrency }}
+                                        </span>
+                                    </ins>
+                                    
+                                    <span ng-show="post.custom_fields._sale_price > 0 && post.custom_fields._regular_price > 0">
+                                        <span class="saving">
+                                            {{ ((post.custom_fields._sale_price/post.custom_fields._regular_price)*100).toFixed(0) }}% Off
+                                        </span>
+                                        
                                     </span>
                                 </p>
                             </div>

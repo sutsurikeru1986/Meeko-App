@@ -89,13 +89,16 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
     })    
     .when(environmentUrl + 'product/:productcategory/:post', {
         templateUrl: partialLocation + 'ProductDetails.html',
-        controller: 'ProductDetails',
-        animate: 'slideLeft'
+        controller: 'ProductDetails'
     })
     .when(environmentUrl + 'product/prev/:postnocat', {
         templateUrl: partialLocation + 'ProductDetails.html',
         controller: 'ProductDetails'
     })   
+    .when(environmentUrl + 'product/:productcategory/:post/redirect', {
+        templateUrl: partialLocation + 'affiliateProductWindow.html',
+        controller: 'ProductDetails'
+    })         
     .when(environmentUrl + 'product/next/:postnocat', {
         templateUrl: partialLocation + 'ProductDetails.html',
         controller: 'ProductDetails'
@@ -103,7 +106,6 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
     .when(environmentUrl + 'about/', {
         templateUrl: partialLocation + 'index.html',
         animate: 'slideLeft'
-        
     })         
     .otherwise({
         redirectTo: environmentUrl
@@ -112,7 +114,7 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
      /**
      *	Sampling caching everything to see how the performance is impacted
      */   
-     $httpProvider.defaults.cache = true;
+     $httpProvider.defaults.cache = false;
     
     /**
      *	Remove # from the URL with $locationProvider
@@ -136,7 +138,7 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
  *
  */
 
-// sorts currency and removes [" "] around the number, then adds £
+// sorts currency
 angular.module('meekoApp').filter('myCurrency', ['$filter', function ($filter) {
   return function(input) {
     input = parseFloat(input);
@@ -285,7 +287,7 @@ meekoApp.filter('nextDress', function () {
         /**
          *  Get posts from a specific category by passing in the slug
          */
-        var url = $http.get(meekoApi + '/api/get_category_posts/?post_type=magazine&custom_fields=all&slug=' + $routeParams.category, { cache: true });
+        var url = $http.get(meekoApi + '/api/get_category_posts/?post_type=magazine&custom_fields=all&slug=' + $routeParams.category, { cache: false });
         
         $rootScope.title = 'Magazine | Meeko';
     }
@@ -297,7 +299,7 @@ meekoApp.filter('nextDress', function () {
             /**
              *  If a page parameter has been passed, send this to the API
              */
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all&page=' + $routeParams.page, { cache: true });
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all&page=' + $routeParams.page, { cache: false });
         }
         else
         {
@@ -305,7 +307,7 @@ meekoApp.filter('nextDress', function () {
              *  If no parameter supplied, just get all posts
              */
             
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all', { cache: true });
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=magazine&custom_fields=all', { cache: false });
 
             // Set a default paging value
             $scope.page = 1;
@@ -361,11 +363,11 @@ meekoApp.filter('nextDress', function () {
 
      };    
 
-    /**
-     *  Get posts from a specific category by passing in the slug
-     */
+/**
+ *  Get posts from a specific category by passing in the slug
+ */
 
-$http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', { cache: true })
+$http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', { cache: false })
     .success(function(data, status, headers, config){
     
         $scope.terms = data.terms;
@@ -384,7 +386,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
 
 
 
-.controller('ProductList', function($scope, $rootScope, $http, $routeParams){
+.controller('ProductList', function($scope, $rootScope, $http, $routeParams, $location){
 
      $scope.loader = { 
 
@@ -399,7 +401,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
          */
         $scope.loader.loading = true;
         
-        var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory, { cache: true });
+        var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory, { cache: false });
         
             var capsdresscategory = $routeParams.productcategory
             
@@ -417,7 +419,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
         
             if($routeParams.page)
             {
-                var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory + '&page=' + $routeParams.page, { cache: true });
+                var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory + '&page=' + $routeParams.page, { cache: false });
 
                 // Get current page
                 $scope.page = $routeParams.page;
@@ -436,7 +438,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
              *  If a page parameter has been passed, send this to the API
              */
             $scope.loader.loading = true;
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page=' + $routeParams.page, { cache: true });
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page=' + $routeParams.page, { cache: false });
         }
         else
         {
@@ -444,36 +446,97 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
              *  If no parameter supplied, just get all posts
              */
             $scope.loader.loading = true ;
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all', { cache: true });
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all', { cache: false });
 
             // Set a default paging value
             $scope.page = 1;
             // Set a default next value
-            $scope.next = 2;
-
+        
+            $scope.next = 2;        
+            
             // Inject the title into the rootScope
             $rootScope.title = 'Newest Work & Party Dresses | Meeko.me';
         }
     }
     url
     .success(function(data, status, headers, config){
-        console.log(data);
-
-        $scope.posts = data.posts;
-        $scope.paging = data;
-        $scope.loader.loading = false;
             
+        //will always start on 'page/1'
         if($routeParams.page)
         {
             
-            $rootScope.categorytitledresses = $routeParams.productcategory;
+            console.log(data);
+
+            $scope.posts = data.posts;
+            $scope.paging = data;
+            $scope.pagingtest = data.pages;
+            $scope.loader.loading = false;
+
+            console.log($scope.pagingtest);
+
+            if($scope.posts.length === 0){
+              //is empty
+                $location.url('/product/page/' + $scope.prev);
+                console.log('empty object');
+            }
             
             // Get current page
             $scope.page = $routeParams.page;
+            console.log($scope.page);
             // Caluculate next/previous values
             $scope.next = parseInt($routeParams.page)+1;
             $scope.prev = parseInt($routeParams.page)-1;
+            
+            
+            if($scope.pagingtest == $scope.page) {
+                
+                console.log('end of the line');
+                $scope.swipePageLeft = function () {
+                    console.log('end of the line - lets restart!');
+                    $location.url('/product/page/1');    
+                };    
+                
+                 $scope.swipePageRight = function () {
+                    console.log('swipe left triggered');
+                    console.log('/product/page/' + $scope.prev);
+                    $location.url('/product/page/' + $scope.prev);
+                };   
+                
+            } else if($scope.page == 1) {
+
+                $scope.swipePageRight = function () {
+                     console.log('start of the line');
+                     $location.url('/product/page/' + $scope.pagingtest);
+                };  
+            
+                $scope.swipePageLeft = function () {
+                    console.log('swipe right triggered');
+                    console.log('/product/page/' + $scope.next);
+                    $location.url('/product/page/' + $scope.next);
+
+                }; 
+                
+            } else {
+                
+                $scope.swipePageLeft = function () {
+                    console.log('swipe right triggered');
+                    console.log('/product/page/' + $scope.next);
+                    $location.url('/product/page/' + $scope.next);
+
+                }; 
+                
+                $scope.swipePageRight = function () {
+                    console.log('swipe left triggered');
+                    console.log('/product/page/' + $scope.prev);
+                    $location.url('/product/page/' + $scope.prev);
+                };   
+                
+            }
+            
+            $rootScope.categorytitledresses = $routeParams.productcategory;
+            
         };   
+
         
     })
     .error(function(data, status, headers, config){
@@ -494,7 +557,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
      *  value of $routeParams.post, which is actually the post slug
      */
     
-    $http.get(meekoApi + '/api/get_post/?post_type=magazine&custom_fields=all&slug=' + $routeParams.post, { cache: true })
+    $http.get(meekoApi + '/api/get_post/?post_type=magazine&custom_fields=all&slug=' + $routeParams.post, { cache: false })
     
     .success(function(data, status, headers, config){
         $scope.post = data;
@@ -513,7 +576,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
 
 
 
-.controller('ProductDetails', function($scope, $rootScope, $http, $routeParams, $filter, $location){
+.controller('ProductDetails', function($scope, $rootScope, $http, $routeParams, $filter, $location, $window, $sce){
 
     $scope.loader = { 
         loading: true,
@@ -538,7 +601,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
              *  If no parameter supplied, just get all posts
              */
             $scope.loader.loading = true ;
-            var url =  $http.get(meekoApi + '/api/get_post/?post_type=product&custom_fields=all&slug=' + $routeParams.post, { cache: true });
+            var url =  $http.get(meekoApi + '/api/get_post/?post_type=product&custom_fields=all&slug=' + $routeParams.post, { cache: false });
 
             // Set a default paging value
             $scope.page = 1;
@@ -551,17 +614,58 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
     url
     .success(function(data, status, headers, config){
         $scope.post = data;
+        
+        console.log($scope.post);
 
         // Inject the title into the rootScope
         $rootScope.title = data.post.title;
         $scope.loader.loading = false;   
         
+        $scope.affiliateRedirect = data.post.custom_fields.externalaffiliateurl;
+        $scope.currentAffiliateUrl = $sce.trustAsResourceUrl($scope.affiliateRedirect);
         
-        $scope.buyDress = function () {
+        var affiliatUrl = window.location.href;  
+        var affiliateAddress = $scope.affiliateRedirect;
+        var affiliateTerm = "amazon";
+        
+        console.log($scope.affiliateRedirect);
+        
+        function openMeekoAffiliate() {
+            
+            if( affiliateAddress.indexOf( affiliateTerm ) != -1 ) {
+                
+                console.log('amazon affilate url');
+                $window.location.href = $scope.affiliateRedirect;
+                
+            } else {
+                
+                console.log('non-amazon affiliate url');
+                $window.location.href = affiliatUrl + '/redirect';
+                
+            }
+            
+            console.log('Brand redirect completed - closing modal');
+            
+        }   
+        
+        var delay = 5000;
+        
+        $scope.buyDress = function($window) {
 
             var reveal = angular.element('#buyNow');
             reveal.foundation();
             reveal.foundation('reveal', 'open');
+ 
+			setTimeout(function() { 
+				//redirect to the brand with a 5 second delay
+                
+                openMeekoAffiliate();
+                
+				//close the modal once redirected to the brand
+			    $('.meekoredirect').fadeOut().removeClass('affiliateWindow').remove();
+                $('.reveal-modal-bg').css('display', 'none');
+                
+			}, delay);            
 
         }
         
@@ -596,6 +700,8 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
             console.log('swipe right triggered');
 
             $rootScope.rightDress = data.previous_url;
+            
+            console.log($rootScope.rightDress);
             
             var rightDressUrl = $rootScope.rightDress;
             
@@ -678,6 +784,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
      *  This method just gets the categories available to us and 
      *  makes them available through CategoryList controller
      */
+    
     $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&count=10&orderby=rand')
     .success(function(data, status, headers, config){
         $scope.posts = data.posts;
@@ -901,3 +1008,38 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
         
     }
 })
+
+
+function loadMoreProducts($scope, $http) {
+    
+    $scope.posts = [];
+    $scope.page = 1;
+
+    $scope.loadMoreItems = function() {
+        $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page='+$scope.page).success(function(data) {
+        var i = data.posts.length;
+        $scope.posts = $scope.posts.concat(data.posts);
+        $scope.posts.push(data);
+        console.log(data.posts[0]);
+        console.log($scope.page);
+        $scope.page +=1;
+        });
+    };
+
+    loadMoreProducts.$inject = ['$scope', '$http'];
+
+    $scope.loadMoreItems();    
+    
+}
+
+meekoApp.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+});

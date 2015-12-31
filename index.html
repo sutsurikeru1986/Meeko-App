@@ -29,6 +29,8 @@
     <!-- include custom AngularJS files -->
     <script src="http://localhost/js/meekoApp.js"></script>
     <script src="http://localhost/js/ngRepeatOwlCarousel.min.js"></script>
+    <script src="http://localhost/js/taggedInfiniteScroll.js"></script>
+    
     
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
@@ -159,9 +161,9 @@
 
             </li>            
 
-            <li class="mobiletab" ng-class="{ activetab:isActive('/product/') }">
+            <li class="mobiletab" ng-class="{ activetab:isActive('/product/page/1') }">
 
-                <a class="latestmeekomobile" href="/product/" ng-class="{ activetab:isActive('/product/') }">
+                <a class="latestmeekomobile" href="/product/page/1" ng-class="{ activetab:isActive('/product/page/1') }">
                     <div class="dressmobileicon"></div>
                     <p>New</p>
                 </a>

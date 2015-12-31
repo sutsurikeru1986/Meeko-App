@@ -2,6 +2,8 @@
   "name": "meeko-dresses",
   "version": "1.0.0",
   "dependencies": {
+    "angular": "^1.4.7",
+    "angular-cache": "^4.4.2",
     "ng-repeat-owl-carousel": "0.0.2"
   },
   "devDependencies": {

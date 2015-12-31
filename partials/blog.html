@@ -109,10 +109,10 @@
 
 <div ng-hide="loader.loading">
     
-    <div class="pagination view-animate">
+    <div class="pagination meekoPagination view-animate">
     
-        <a ng-show="prev > 0" href="/magazine/page/{{ prev }}">Prev</a> |
-        Page {{ page }} of {{paging.pages}} | 
+        <a ng-show="prev > 0" href="/magazine/page/{{ prev }}">Prev</a> 
+        <span>Page {{ page }} of {{paging.pages}}</span>
         <a ng-show="next <= paging.pages" href="/blog/page/{{ next }}">Next</a>
 
     </div>

@@ -1,4 +1,4 @@
-<section id="meekoLatestProducts">
+<section id="meekoLatestProducts" ng-swipe-left="swipePageLeft()" ng-swipe-right="swipePageRight()">
     
     <div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
     
@@ -23,7 +23,7 @@
         
     </div>    
     
-    <div class="row">
+    <div class="row"> 
 
         <div class="small-12 columns">
 
@@ -37,7 +37,7 @@
 
                             <div class="dressimg">
                                 <a href="/product/{{ post.taxonomy_product_cat[0].slug }}/{{ post.slug }}">
-                                    <img src="{{ post.thumbnail_images.full.url }}" />
+                                    <img ng-src="{{ post.thumbnail_images.full.url }}" />
                                 </a>
                             </div>
 
@@ -49,20 +49,20 @@
 
                             <div class="dressprice">
                                 <p>
+
+                                   <del ng-show="post.custom_fields._regular_price > 0">
+                                        <span class="amount">
+                                            {{ post.custom_fields._regular_price | myCurrency }}
+                                        </span>
+                                    </del>
+
+                                    <ins ng-show="post.custom_fields._sale_price > 0">
+                                        <span class="amount">
+                                            {{ post.custom_fields._sale_price | myCurrency }}
+                                        </span>
+                                    </ins>
                                     
-                                    <span ng-if="post.custom_fields._regular_price == ''"></span>    
-                                    <span ng-if="post.custom_fields._regular_price != ''" class="amount">
-                                        {{ post.custom_fields._regular_price | myCurrency }}
-                                    </span>
-
-
-                                    <span ng-if="post.custom_fields._sale_price == ''"></span>
-
-                                    <span ng-if="post.custom_fields._sale_price != ''" class="amount">
-                                        {{ post.custom_fields._sale_price | myCurrency }}
-                                    </span>
-                                    
-                                    <span ng-if="post.custom_fields._sale_price != '' && post.custom_fields._sale_price != ''">
+                                    <span ng-show="post.custom_fields._sale_price > 0 && post.custom_fields._regular_price > 0">
                                         <span class="saving">
                                             {{ ((post.custom_fields._sale_price/post.custom_fields._regular_price)*100).toFixed(0) }}% Off
                                         </span>
@@ -83,10 +83,10 @@
             
             <div ng-hide="loader.loading">
                 
-                <div class="pagination view-animate">
+                <div class="pagination meekoPagination view-animate">
 
-                    <a ng-show="prev > 0" href="/product/page/{{ prev }}">Prev</a> |
-                    Page {{ page }} of {{paging.pages}} | 
+                    <a ng-show="prev > 0" href="/product/page/{{ prev }}">Prev</a> 
+                    <span>Page {{ page }} of {{paging.pages}}</span>
                     <a ng-show="next <= paging.pages" href="/product/page/{{ next }}">Next</a>
 
                 </div> 
