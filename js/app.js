@@ -401,7 +401,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
          */
         $scope.loader.loading = true;
         
-        var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory, { cache: false });
+        var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory, { cache: true });
         
             var capsdresscategory = $routeParams.productcategory
             
@@ -419,7 +419,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
         
             if($routeParams.page)
             {
-                var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory + '&page=' + $routeParams.page, { cache: false });
+                var url = $http.get(meekoApi + '/api/korkmaz/get_taxonomy_posts/?taxonomy=product_cat&post_type=product&custom_fields=all&slug=' + $routeParams.productcategory + '&page=' + $routeParams.page, { cache: true });
 
                 // Get current page
                 $scope.page = $routeParams.page;
@@ -438,7 +438,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
              *  If a page parameter has been passed, send this to the API
              */
             $scope.loader.loading = true;
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page=' + $routeParams.page, { cache: false });
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page=' + $routeParams.page, { cache: true });
         }
         else
         {
@@ -446,7 +446,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
              *  If no parameter supplied, just get all posts
              */
             $scope.loader.loading = true ;
-            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all', { cache: false });
+            var url = $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all', { cache: true });
 
             // Set a default paging value
             $scope.page = 1;
@@ -460,6 +460,10 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
     }
     url
     .success(function(data, status, headers, config){
+        
+        $scope.posts = data.posts;
+        $scope.paging = data;
+        $scope.loader.loading = false ;         
             
         //will always start on 'page/1'
         if($routeParams.page)
