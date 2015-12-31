@@ -1007,39 +1007,4 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
         }
         
     }
-})
-
-
-function loadMoreProducts($scope, $http) {
-    
-    $scope.posts = [];
-    $scope.page = 1;
-
-    $scope.loadMoreItems = function() {
-        $http.get(meekoApi + '/api/get_posts/?post_type=product&custom_fields=all&page='+$scope.page).success(function(data) {
-        var i = data.posts.length;
-        $scope.posts = $scope.posts.concat(data.posts);
-        $scope.posts.push(data);
-        console.log(data.posts[0]);
-        console.log($scope.page);
-        $scope.page +=1;
-        });
-    };
-
-    loadMoreProducts.$inject = ['$scope', '$http'];
-
-    $scope.loadMoreItems();    
-    
-}
-
-meekoApp.directive('whenScrolled', function() {
-    return function(scope, elm, attr) {
-        var raw = elm[0];
-
-        elm.bind('scroll', function() {
-            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-                scope.$apply(attr.whenScrolled);
-            }
-        });
-    };
 });
