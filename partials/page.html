@@ -1,3 +1,58 @@
-<h1 ng-bind="page.title"></h1>
-<div ng-bind-html="page.content"></div>
-<div ng-bind-html="page.custom_fields.call_to_action[0]"></div>
+<section id="meekomagazine" class="meekomagajax">
+
+    <div class="row fullwidthmeeko">
+
+        <div class="small-12 columns">
+
+            <div class="magazinehome">
+                
+                <div ng-hide="loader.loading" class="row">
+
+                    <div class="small-12 medium-12 large-12 columns">
+
+                        <div class="breadcrumb-wishlist productheader">
+
+                            <div class="row">
+
+                                <div class="small-12 medium-10 large-10 columns" itemprop="breadcrumb">
+                                    <p>
+                                        <a class="home" href="http://localhost">Home</a> / <span>{{ page.title }}</span></p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>                       
+                
+                <div class="row">
+
+                    <div class="small-12 columns">
+                        
+                        <div ng-hide="loader.loading">
+                            
+                            <div class="staticContent">
+
+                                <h1 ng-bind="page.title"></h1>
+
+                                <div ng-bind-html="page.content"></div>  
+                                
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+                
+                <div ng-show="loader.loading"><div class="ajax-loader-meeko-app"></div></div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</section>

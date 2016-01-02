@@ -49,19 +49,19 @@
                             <div class="dressprice">
                                 <p>
                                     
-                                    <span ng-if="post.custom_fields._regular_price == ''"></span>    
-                                    <span ng-if="post.custom_fields._regular_price != ''" class="amount">
-                                        {{ post.custom_fields._regular_price | myCurrency }}
-                                    </span>
+                                   <del ng-show="post.custom_fields._regular_price > 0">
+                                        <span class="amount">
+                                            {{ post.custom_fields._regular_price | myCurrency }}
+                                        </span>
+                                    </del>
 
-
-                                    <span ng-if="post.custom_fields._sale_price == ''"></span>
-
-                                    <span ng-if="post.custom_fields._sale_price != ''" class="amount">
-                                        {{ post.custom_fields._sale_price | myCurrency }}
-                                    </span>
+                                    <ins ng-show="post.custom_fields._sale_price > 0">
+                                        <span class="amount">
+                                            {{ post.custom_fields._sale_price | myCurrency }}
+                                        </span>
+                                    </ins>
                                     
-                                    <span ng-if="post.custom_fields._sale_price != '' && post.custom_fields._sale_price != ''">
+                                    <span ng-show="post.custom_fields._sale_price > 0 && post.custom_fields._regular_price > 0">
                                         <span class="saving">
                                             {{ ((post.custom_fields._sale_price/post.custom_fields._regular_price)*100).toFixed(0) }}% Off
                                         </span>
@@ -82,10 +82,10 @@
             
             <div ng-hide="loader.loading">
 
-                <div class="pagination view-animate">
+                <div class="pagination meekoPagination view-animate">
 
-                    <a ng-show="prev > 0" href="/search/{{ searchedDress }}/page/{{ prev }}">Prev</a> |
-                    Page {{ page }} of {{paging.pages}} | 
+                    <a ng-show="prev > 0" href="/search/{{ searchedDress }}/page/{{ prev }}">Prev</a> 
+                    <span>Page {{ page }} of {{paging.pages}}</span>
                     <a ng-show="next <= paging.pages" href="/search/{{ searchedDress }}/page/{{ next }}">Next</a>
 
                 </div>    

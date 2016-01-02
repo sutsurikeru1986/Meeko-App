@@ -55,13 +55,20 @@ i.fa.fa-angle-left.fa-3 {
   top: 0;
   left: 0; }
 
-.slideLeft.ng-enter, .slideLeft.ng-leave {
+.slideLeft.ng-enter, .slideLeft.ng-leave,
+.slideRight.ng-enter,
+.slideRight.ng-leave,
+.slideTop.ng-enter,
+.slideTop.ng-leave {
   -webkit-transition: all 1s;
   transition: all 1s; }
 
-.slideRight.ng-enter, .slideRight.ng-leave {
-  -webkit-transition: all 1s;
-  transition: all 1s; }
+.slideTop.ng-enter {
+  top: 100%; }
+  .slideTop.ng-enter.ng-enter-active {
+    top: 0; }
+.slideTop.ng-leave.ng-leave-active {
+  top: -100%; }
 
 .slideLeft.ng-enter {
   left: 100%; }
@@ -97,7 +104,8 @@ i.fa.fa-angle-left.fa-3 {
     display: inherit;
     margin-top: 15px; }
     #header .search input {
-      border-radius: 5px; }
+      border-radius: 5px;
+      color: #404040; }
     #header .search .search-form .submit {
       right: 10px; }
   #header .searchbg {
@@ -107,9 +115,6 @@ i.fa.fa-angle-left.fa-3 {
 .mobilehome {
   padding-bottom: 70px;
   padding-top: 45px; }
-
-.ng-hide {
-  display: none; }
 
 .activetab {
   background: #FE0173;
@@ -134,6 +139,13 @@ i.fa.fa-angle-left.fa-3 {
 
 .dressmobileicon {
   background: url("dress-home-icon.png") no-repeat;
+  height: 18px;
+  width: 18px;
+  margin: 0 auto;
+  margin-top: 4px; }
+
+.hamburger {
+  background: url("hamburger.png") no-repeat;
   height: 18px;
   width: 18px;
   margin: 0 auto;
@@ -206,12 +218,14 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
 .search-form .meeko-search-bar {
   webkit-border-radius: 5px !important;
   moz-border-radius: 5px;
-  border-radius: 5px; }
+  border-radius: 5px;
+  font-size: 14px; }
 
 #meekomagazine {
-  padding: 30px 0 75px;
+  padding: 55px 0 0;
   height: calc(100% + 1px);
-  transform: translate3d(0, 0, 0); }
+  transform: translate3d(0, 0, 0);
+  margin-top: 0; }
   #meekomagazine .magazineitem {
     box-shadow: none !important;
     width: 100%; }
@@ -224,6 +238,8 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
       box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1) !important;
       margin-bottom: 0 !important;
       background: #fff; }
+    #meekomagazine .magazineitem .magazinecontent {
+      margin-bottom: 60px; }
 
 #mayalsolike .relatedbg {
   margin-top: 0;
@@ -293,6 +309,39 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
         font-family: "Open Sans", arial;
         color: #646473; }
 
+.mainMenu {
+  padding-bottom: 80px; }
+  .mainMenu .menuSection {
+    background: #ffffff; }
+    .mainMenu .menuSection h2 {
+      font-size: 16px;
+      text-transform: uppercase;
+      font-family: "Open Sans", arial;
+      padding: 5px;
+      color: #333; }
+  .mainMenu .connectWithUs {
+    background: #FE1880;
+    padding: 10px; }
+    .mainMenu .connectWithUs::after {
+      clear: both;
+      content: "";
+      display: block; }
+    .mainMenu .connectWithUs ul {
+      text-align: center; }
+      .mainMenu .connectWithUs ul li {
+        display: inline; }
+  .mainMenu ul {
+    list-style: none; }
+    .mainMenu ul li .menuContainer {
+      padding: 5px;
+      background: #ffffff; }
+      .mainMenu ul li .menuContainer .menuTitle {
+        text-align: left;
+        padding: 5px 0 0;
+        font-size: 13px;
+        font-family: "Open Sans", arial;
+        color: #646473; }
+
 #mobilemeekohome .mobilequicktab .mobiletab p a:focus, #mobilemeekohome .mobilequicktab .mobiletab p a:hover, #mobilemeekohome .mobilequicktab .mobiletab p a:active {
   font-weight: normal;
   color: #fff !important;
@@ -301,18 +350,19 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
 .sizeavailable li a:hover, .sizeavailable li a:focus, .coloravailable li a:hover, .coloravailable li a:focus, .sizeavailableQv li a:hover, .sizeavailableQv li a:focus {
   color: #FE1880 !important; }
 
-#meekoLatestProducts .breadcrumb-wishlist, .magazinehome .breadcrumb-wishlist {
+.breadcrumb-wishlist {
   padding: 10px 5px; }
-  #meekoLatestProducts .breadcrumb-wishlist p, .magazinehome .breadcrumb-wishlist p {
+  .breadcrumb-wishlist p {
     margin: 0;
     font-size: 11px;
     font-family: "open sans", arial;
     color: #646473;
     text-transform: uppercase; }
-    #meekoLatestProducts .breadcrumb-wishlist p a, .magazinehome .breadcrumb-wishlist p a {
+    .breadcrumb-wishlist p a {
       color: #646473;
       text-decoration: underline; }
-#meekoLatestProducts .productheader, .magazinehome .productheader {
+
+.productheader {
   background: #FCFCFC; }
 
 .latestbg {
@@ -340,6 +390,19 @@ a.promos, a.latestmeekomobile, a.latestmeekomag {
     font-size: 12px;
     text-transform: uppercase;
     font-family: "Open Sans", arial; }
+
+.staticContent {
+  padding: 0 5px 60px 5px;
+  font-family: "Open Sans", arial; }
+  .staticContent h1 {
+    font-size: 16px;
+    color: #5B5B6A;
+    margin: 0; }
+  .staticContent p {
+    font-size: 13px; }
+
+#buynowIframe {
+  padding-top: 45px; }
 
 .ajax-loader-meeko-app {
   position: fixed;

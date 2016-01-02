@@ -113,18 +113,24 @@ i.fa.fa-angle-left.fa-3 {
     left: 0;
 }
 
-
-.slideLeft {
+.slideLeft,
+.slideRight,
+.slideTop {
   &.ng-enter, &.ng-leave {
     -webkit-transition: all 1s;
     transition: all 1s;
   }
 }
 
-.slideRight {
-  &.ng-enter, &.ng-leave {
-    -webkit-transition: all 1s;
-    transition: all 1s;
+.slideTop {
+  &.ng-enter {
+    top: 100%;
+    &.ng-enter-active {
+      top: 0;
+    }
+  }
+  &.ng-leave.ng-leave-active {
+    top: -100%;
   }
 }
 
@@ -176,7 +182,8 @@ i.fa.fa-angle-left.fa-3 {
             display: inherit; 
             margin-top: 15px;
                 input {
-                    border-radius: 5px;    
+                    border-radius: 5px;  
+                    color: $chargray
                 }
             .search-form {
                 .submit {
@@ -196,7 +203,7 @@ i.fa.fa-angle-left.fa-3 {
 }
 
 .ng-hide {
-    display: none;
+    //display: none;
 }
 
 .activetab {
@@ -225,6 +232,14 @@ i.fa.fa-angle-left.fa-3 {
 
 .dressmobileicon {
     background: url('dress-home-icon.png') no-repeat;
+    height: 18px;
+    width: 18px;
+    margin: 0 auto;
+    margin-top: 4px
+}
+
+.hamburger {
+    background: url('hamburger.png') no-repeat;
     height: 18px;
     width: 18px;
     margin: 0 auto;
@@ -332,13 +347,15 @@ a {
         webkit-border-radius: 5px!important;
         moz-border-radius: 5px;
         border-radius: 5px;
+        font-size: 14px;
     }
 }
 
 #meekomagazine {
-    padding: 30px 0 75px;
+    padding: 55px 0 0;
     height: calc(100% + 1px);
     transform: translate3d(0,0,0);
+    margin-top: 0;
     .magazineitem {
         box-shadow: none !important;
         width: 100%;
@@ -354,7 +371,10 @@ a {
             box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1)!important;
             margin-bottom: 0 !important;
             background: #fff;
-        }        
+        }  
+        .magazinecontent {
+            margin-bottom: 60px;    
+        }
     }
 }
 
@@ -458,6 +478,53 @@ a {
     }
 }
 
+.mainMenu {
+    padding-bottom: 80px;
+    .menuSection {
+        background: $white;
+            h2 {
+                font-size: 16px;
+                text-transform: uppercase;
+                font-family: $opensans;
+                padding: 5px;
+                color: $favgray;
+            }
+    }
+    .connectWithUs {
+        background: $instylepink;
+        padding: 10px;
+            &::after {
+                clear: both;
+                content: "";
+                display: block;
+            }
+            ul {
+                text-align: center;
+                    li {
+                        display: inline;   
+                    }
+            }
+    }
+    ul {
+        list-style: none;
+        li {
+            .menuContainer {
+                padding: 5px;
+                //box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+                background: $white;
+                //margin-bottom: 10px;
+                    .menuTitle {
+                        text-align: left;
+                        padding: 5px 0 0;
+                        font-size: 13px;
+                        font-family: $opensans;
+                        color: $meekoblue;
+                    }
+            }
+        }
+    }
+}
+
 #mobilemeekohome .mobilequicktab .mobiletab p a {
   &:focus, &:hover, &:active {
     font-weight: normal;
@@ -477,25 +544,24 @@ a {
     }
 }
 
-#meekoLatestProducts, .magazinehome {
-	.breadcrumb-wishlist {
-		padding: 10px 5px;
-		p {
-			margin: 0;
-			font-size: 11px;
-			font-family: "open sans", arial;
-			color: #646473;
-			text-transform: uppercase;
-			a {
-				color: #646473;
-				text-decoration: underline;
-			}
-		}
-    }
-    .productheader {
-        background: #FCFCFC;
+.breadcrumb-wishlist {
+    padding: 10px 5px;
+    p {
+        margin: 0;
+        font-size: 11px;
+        font-family: "open sans", arial;
+        color: #646473;
+        text-transform: uppercase;
+        a {
+            color: #646473;
+            text-decoration: underline;
+        }
     }
 }
+.productheader {
+    background: #FCFCFC;
+}
+
 
 .latestbg {
     background: #FCFCFC;
@@ -529,6 +595,23 @@ a {
             text-transform: uppercase;
             font-family: $opensans;
         }
+}
+
+.staticContent {
+    padding: 0 5px 60px 5px;
+    font-family: $opensans;
+        h1 {
+            font-size: 16px;
+            color: $meekodarkblue;
+            margin: 0;
+        }
+        p {
+            font-size: 13px;
+        }
+}
+
+#buynowIframe {
+    padding-top: 45px
 }
 
 .ajax-loader-meeko-app {

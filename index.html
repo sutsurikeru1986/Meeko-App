@@ -15,13 +15,13 @@
 
     <!-- include AngularJS plus modules -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
-    <script type="text/javascript" src="http://preview.meeko.me/wp-content/themes/meeko/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="http://localhost/meeko/wp-content/themes/meeko/js/owl.carousel.min.js"></script>
     <script src="//code.angularjs.org/1.2.22/angular-route.min.js"></script>
     <script src="//code.angularjs.org/1.2.22/angular-animate.min.js"></script>
     <script src="//code.angularjs.org/1.2.22/angular-resource.min.js"></script>
     <script src="//code.angularjs.org/1.2.22/angular-sanitize.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular-touch.js"></script>
-    <script type="text/javascript" src="http://preview.meeko.me/wp-content/themes/meeko/js/foundation.min.js"></script>
+    <script type="text/javascript" src="http://localhost/meeko/wp-content/themes/meeko/js/foundation.min.js"></script>
 
     <!-- include custom AngularJS files -->
     <script src="http://localhost/js/app.js"></script>
@@ -37,17 +37,17 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
     <!-- include custom CSS -->
-    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/foundation.custom.min.css" rel="stylesheet">
-    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/normalize.css" rel="stylesheet">
-    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/styles.css" rel="stylesheet">
+    <link href="http://localhost/meeko/wp-content/themes/meeko/css/foundation.custom.min.css" rel="stylesheet">
+    <link href="http://localhost/meeko/wp-content/themes/meeko/css/normalize.css" rel="stylesheet">
+    <link href="http://localhost/meeko/wp-content/themes/meeko/css/styles.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700" rel="stylesheet" type="text/css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css?c99495" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/nga.css" />
 
-    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.carousel.css" rel="stylesheet">
-    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.theme.css" rel="stylesheet">
-    <link href="http://preview.meeko.me/wp-content/themes/meeko/css/owl.transitions.css" rel="stylesheet">
+    <link href="http://localhost/meeko/wp-content/themes/meeko/css/owl.carousel.css" rel="stylesheet">
+    <link href="http://localhost/meeko/wp-content/themes/meeko/css/owl.theme.css" rel="stylesheet">
+    <link href="http://localhost/meeko/wp-content/themes/meeko/css/owl.transitions.css" rel="stylesheet">
 
     <script>
         $(window).bind("load", function () {
@@ -81,7 +81,7 @@
 
         <div class="show-for-small-only searchiconmobile">
             
-            <img alt="Search for the perfect dress" title="Search for the perfect dress" src="http://preview.meeko.me/wp-content/themes/meeko/img/searchmobile.png?86c610" ng-click="collapsed = !collapsed">
+            <img alt="Search for the perfect dress" title="Search for the perfect dress" src="http://localhost/meeko/wp-content/themes/meeko/img/searchmobile.png?86c610" ng-click="collapsed = !collapsed">
             
         </div>
         
@@ -150,7 +150,7 @@
                     <p>Home</p>
                 </a>
 
-            </li>
+            </li>            
             
             <li class="mobiletab" ng-class="{ activetab:isActive('/styles/') }">
 
@@ -179,15 +179,15 @@
                 </a>
 
             </li>
+            
+            <li class="mobiletab" ng-class="{ activetab:isActive('/menu/') }">
 
-            <li class="mobiletab" ng-class="{ activetab:isActive('/about/') }">
-
-                <a class="latestmeekomag" href="/about/" ng-class="{ activetab:isActive('/about/') }">
-                    <div class="meekomobileicon"></div>
-                    <p>About us</p>
+                <a class="latestmeekomobile" href="/menu/" ng-class="{ activetab:isActive('/menu/') }">
+                    <div class="hamburger"></div>
+                    <p>Menu</p>
                 </a>
 
-            </li>
+            </li>              
 
         </ul>
 

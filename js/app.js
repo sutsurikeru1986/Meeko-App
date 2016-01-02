@@ -95,17 +95,23 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
         templateUrl: partialLocation + 'ProductDetails.html',
         controller: 'ProductDetails'
     })   
-    .when(environmentUrl + 'product/:productcategory/:post/redirect', {
+    .when(environmentUrl + 'product/:productcategory/:post/buy', {
         templateUrl: partialLocation + 'affiliateProductWindow.html',
         controller: 'ProductDetails'
     })         
     .when(environmentUrl + 'product/next/:postnocat', {
         templateUrl: partialLocation + 'ProductDetails.html',
         controller: 'ProductDetails'
-    })    
-    .when(environmentUrl + 'about/', {
-        templateUrl: partialLocation + 'index.html',
-        animate: 'slideLeft'
+    })   
+    .when(environmentUrl + 'menu/', {
+        templateUrl: partialLocation + 'mainMenu.html',
+        animate: 'slideTop',
+        controller: 'MainMenuCategoryList'
+    })     
+    .when(environmentUrl + ':page', {
+        templateUrl: partialLocation + 'page.html',
+        animate: 'slideTop',
+        controller: 'GetPage'
     })         
     .otherwise({
         redirectTo: environmentUrl
@@ -127,6 +133,7 @@ var meekoApp = angular.module('meekoApp', ['ngRoute', 'ngAnimate', 'ngResource',
     focusSearch.click(function() {
         $('#search').focus();
         console.log('focused input');
+        angular.element('#searchDresses').removeClass('ng-hide');
     });
     
 }])
@@ -214,17 +221,19 @@ meekoApp.filter('nextDress', function () {
 .controller('searchController', function($scope, $rootScope, $http, $routeParams, $location) {  
     // this field is bound to ng-model="search" in your HTML 
     $scope.search = '';
-
+    
+    //angular.element('#searchDresses').addClass('ng-hide');
+    
     $scope.fetchResults = function(search) {
-
         console.log(search);
         $location.url('search/' + search);
         
         //clear search once submitted
         $scope.search = '';
+        angular.element('#searchDresses').addClass('ng-hide');
     };      
 
-    // this line will be called once when controller is initialized
+    // this line will be called once when controller is initialize
 })
 
 /**
@@ -250,18 +259,24 @@ meekoApp.filter('nextDress', function () {
  *	to the API in order to retrieve information for the specific page
  *
  */
-.controller('GetPage', function($scope, $rootScope, $http, $location){
+.controller('GetPage', function($scope, $rootScope, $http, $location, $routeParams){
 
-	/**
-	 *	Perform a GET request on the API and pass the slug to it using $location.url()
-	 *	On success, pass the data to the view through $scope.page
-	 */
-	$http.get(meekoApi + '/api/get_page/?custom_fields=all&slug=' + $location.url())
+    
+    $scope.loader = { 
+        loading: true,
+    };
+    
+    if($routeParams.page)
+    {
+	var url = $http.get(meekoApi + '/api/get_page/?custom_fields=all&slug=' + $routeParams.page);
+    }
+    url
     .success(function(data, status, headers, config){
+        
+        $scope.loader.loading = false;
         $scope.page = data.page;
-
-        // Inject the title into the rootScope
         $rootScope.title = data.page.title;
+        
     })
     .error(function(data, status, headers, config){
         //window.alert("no page");
@@ -644,7 +659,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
             } else {
                 
                 console.log('non-amazon affiliate url');
-                $window.location.href = affiliatUrl + '/redirect';
+                $window.location.href = affiliatUrl + '/buy';
                 
             }
             
@@ -823,6 +838,45 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
         //window.alert("Unable to get categories from Meeko");
     })
 
+})
+
+
+.controller('MainMenuCategoryList', function($scope, $rootScope, $http, $routeParams, $location){
+  
+     $scope.loader = { 
+
+      loading : true ,
+
+     };    
+
+/**
+ *  Get posts from a specific category by passing in the slug
+ */
+
+$http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', { cache: false })
+    .success(function(data, status, headers, config){
+    
+        $scope.terms = data.terms;
+    
+        //$scope.terms = data.terms;
+        $scope.loader.loading = false ; 
+        //console.log(data);
+        $rootScope.title = ' Menu | Meeko.me';
+    
+        $rootScope.dressTypeTitle = 'Dress Types';
+        $rootScope.aboutusTitle = 'About Us';
+        $rootScope.connectWithUs = 'Connect';
+         $rootScope.otherStuff = 'Other';
+    
+        $scope.goToCategory = function (dressCategory) {
+            $location.path(dressCategory);
+        }
+
+    })
+    .error(function(data, status, headers, config){
+        //window.alert("no posts");
+    })
+    
 })
 
 

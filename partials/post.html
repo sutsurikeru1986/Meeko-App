@@ -1,32 +1,60 @@
-<div id="meekomagazine">
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="magazinewrapper">
-                <div class="row">
-                    <div class="large-offset-1 large-10 large-offset-1 columns">
-                        <div class="magazineitem fullwidthmagazine">
-                            <div class="imagepreview">
+<div ng-show="loader.loading">
+    <div class="ajax-loader-meeko-app"></div>
+</div>
 
-                                <img src="{{ post.post.thumbnail_images.full.url ? post.post.thumbnail_images.full.url : post.post.custom_fields.meekopin }}" />
+<div ng-hide="loader.loading">
+    <div id="meekomagazine">
 
-                                <div class="magazinefull">
-                                    <h1 ng-bind-html="post.post.title"></h1>
+        <div class="row">
+
+            <div class="small-12 medium-12 large-12 columns">
+
+                <div class="breadcrumb-wishlist productheader">
+
+                    <div class="row">
+
+                        <div class="small-12 medium-10 large-10 columns" itemprop="breadcrumb">
+                            <p>
+                                <a class="home" href="http://localhost">Home</a> / <a href="/magazine/{{ post.post.categories[0].title }}">{{ post.post.categories[0].slug }}</a> / <span ng-bind-html="post.post.title"></span></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="magazinewrapper">
+                    <div class="row">
+                        <div class="large-offset-1 large-10 large-offset-1 columns">
+                            <div class="magazineitem fullwidthmagazine">
+                                <div class="imagepreview">
+
+                                    <img src="{{ post.post.thumbnail_images.full.url ? post.post.thumbnail_images.full.url : post.post.custom_fields.meekopin }}" />
+
+                                    <div class="magazinefull">
+                                        <h1 ng-bind-html="post.post.title"></h1>
+                                    </div>
+
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="large-12 columns">
-            <div class="magazinewrapper">
-                <div class="row">
-                    <div class="large-offset-1 large-10 large-offset-1 columns">
-                        <div class="magazineitem fullwidthmagazine">
-                            <div class="magazinecontent" ng-bind-html="post.post.content"> </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="magazinewrapper">
+                    <div class="row">
+                        <div class="large-offset-1 large-10 large-offset-1 columns">
+                            <div class="magazineitem fullwidthmagazine">
+                                <div class="magazinecontent" ng-bind-html="post.post.content"> </div>
+                            </div>
                         </div>
                     </div>
                 </div>
