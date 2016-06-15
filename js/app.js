@@ -354,7 +354,7 @@ meekoApp.filter('nextDress', function () {
         {
             // Get current page
             $scope.page = $routeParams.page;
-            // Caluculate next/previous values
+            // Calculate next/previous values
             $scope.next = parseInt($routeParams.page)+1;
             $scope.prev = parseInt($routeParams.page)-1;
         };
@@ -438,7 +438,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
 
                 // Get current page
                 $scope.page = $routeParams.page;
-                // Caluculate next/previous values
+                // Calculate next/previous values
                 $scope.next = parseInt($routeParams.page)+1;
                 $scope.prev = parseInt($routeParams.page)-1;
             };
@@ -502,7 +502,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
             // Get current page
             $scope.page = $routeParams.page;
             console.log($scope.page);
-            // Caluculate next/previous values
+            // Calculate next/previous values
             $scope.next = parseInt($routeParams.page)+1;
             $scope.prev = parseInt($routeParams.page)-1;
             
@@ -937,7 +937,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
 
                 // Get current page
                 $scope.page = $routeParams.page;
-                // Caluculate next/previous values
+                // Calculate next/previous values
                 $scope.next = parseInt($routeParams.page)+1;
                 $scope.prev = parseInt($routeParams.page)-1;
             };
@@ -968,7 +968,7 @@ $http.get(meekoApi + '/api/taxonomy/get_taxonomy_index/?taxonomy=product_cat', {
             
             // Get current page
             $scope.page = $routeParams.page;
-            // Caluculate next/previous values
+            // Calculate next/previous values
             $scope.next = parseInt($routeParams.page)+1;
             $scope.prev = parseInt($routeParams.page)-1;
         };   
